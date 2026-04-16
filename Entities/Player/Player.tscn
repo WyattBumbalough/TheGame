@@ -1,0 +1,192 @@
+[gd_scene format=3 uid="uid://cwjomq7poa3ul"]
+
+[ext_resource type="Script" uid="uid://d3e6bfqrdanju" path="res://Entities/Player/player.gd" id="1_2v7dq"]
+[ext_resource type="PackedScene" uid="uid://buyir3bb35s8g" path="res://Entities/Player/Weapon Manager/weapon_manager.tscn" id="2_761t5"]
+[ext_resource type="Script" uid="uid://dhxpybn3be11e" path="res://Common/State Machine/state_machine.gd" id="2_oeplr"]
+[ext_resource type="Script" uid="uid://b7buwxinxyh7i" path="res://Entities/Player/States/player_idle.gd" id="3_oeplr"]
+[ext_resource type="Script" uid="uid://hl5i56hdi4uo" path="res://Entities/Player/States/player_walk.gd" id="4_r4xyb"]
+[ext_resource type="Script" uid="uid://xl8ijqm5sg7h" path="res://Entities/Player/States/player_run.gd" id="5_c7660"]
+[ext_resource type="Script" uid="uid://disnpeb1gm84n" path="res://Entities/Player/States/player_jump.gd" id="6_6vmt3"]
+[ext_resource type="Script" uid="uid://de161ovm1jdt0" path="res://Entities/Player/States/player_fall.gd" id="7_61c8j"]
+[ext_resource type="Script" uid="uid://8wxy8i07gac1" path="res://Entities/Player/States/player_crouch.gd" id="8_o4v1s"]
+[ext_resource type="Texture2D" uid="uid://c1ga7863m47nv" path="res://Assets/Reticles/crosshair007.png" id="10_hacra"]
+[ext_resource type="Script" uid="uid://blmqb163okhfp" path="res://Entities/Player/crosshair.gd" id="10_jynvv"]
+[ext_resource type="Texture2D" uid="uid://cldhmereu64ky" path="res://Assets/Reticles/crosshair051.png" id="12_lmeus"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mvdsw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2v7dq"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_2v7dq"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 1500.0
+dof_blur_amount = 0.03
+
+[sub_resource type="SphereMesh" id="SphereMesh_sbnxc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_oeplr"]
+size = Vector3(0.51, 0.32, 1.095)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wsixc"]
+albedo_color = Color(0.10224319, 0.10224321, 0.10224321, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_r4xyb"]
+font_size = 50
+
+[node name="Player" type="CharacterBody3D" unique_id=222571555]
+script = ExtResource("1_2v7dq")
+allow_sprint = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1284730491]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+layers = 524288
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_mvdsw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1117889445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_2v7dq")
+
+[node name="Head" type="Node3D" parent="." unique_id=1586777397]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7002048, 0)
+metadata/_edit_group_ = true
+
+[node name="Camera" type="Camera3D" parent="Head" unique_id=212456546]
+unique_name_in_owner = true
+cull_mask = 524287
+attributes = SubResource("CameraAttributesPractical_2v7dq")
+fov = 65.0
+
+[node name="WeaponManager" parent="Head/Camera" unique_id=1460823030 instance=ExtResource("2_761t5")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head" unique_id=976964842]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, -0.0897913, 0)
+layers = 524288
+mesh = SubResource("SphereMesh_sbnxc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/MeshInstance3D" unique_id=966979552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.44189322, 0, 0.1291399, -0.3093412)
+layers = 524288
+mesh = SubResource("BoxMesh_oeplr")
+surface_material_override/0 = SubResource("StandardMaterial3D_wsixc")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1214362270 node_paths=PackedStringArray("starting_state")]
+unique_name_in_owner = true
+script = ExtResource("2_oeplr")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=492242798 node_paths=PackedStringArray("idle_state", "walk_state", "run_state", "jump_state", "fall_state", "crouch_state")]
+script = ExtResource("3_oeplr")
+idle_state = NodePath(".")
+walk_state = NodePath("../Walk")
+run_state = NodePath("../Run")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+crouch_state = NodePath("../Crouch")
+
+[node name="Walk" type="Node" parent="StateMachine" unique_id=89879183 node_paths=PackedStringArray("idle_state", "walk_state", "run_state", "jump_state", "fall_state", "crouch_state")]
+script = ExtResource("4_r4xyb")
+speed = 7.0
+accel = 0.125
+idle_state = NodePath("../Idle")
+walk_state = NodePath(".")
+run_state = NodePath("../Run")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+crouch_state = NodePath("../Crouch")
+
+[node name="Run" type="Node" parent="StateMachine" unique_id=1489990895 node_paths=PackedStringArray("idle_state", "walk_state", "run_state", "jump_state", "fall_state", "crouch_state")]
+script = ExtResource("5_c7660")
+speed = 8.0
+friction = 0.1
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+run_state = NodePath(".")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+crouch_state = NodePath("../Crouch")
+
+[node name="Jump" type="Node" parent="StateMachine" unique_id=1065186329 node_paths=PackedStringArray("idle_state", "walk_state", "run_state", "jump_state", "fall_state", "crouch_state")]
+script = ExtResource("6_6vmt3")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+run_state = NodePath("../Run")
+jump_state = NodePath(".")
+fall_state = NodePath("../Fall")
+crouch_state = NodePath("../Crouch")
+
+[node name="Fall" type="Node" parent="StateMachine" unique_id=1017920320 node_paths=PackedStringArray("idle_state", "walk_state", "run_state", "jump_state", "fall_state", "crouch_state")]
+script = ExtResource("7_61c8j")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+run_state = NodePath("../Run")
+jump_state = NodePath("../Jump")
+fall_state = NodePath(".")
+crouch_state = NodePath("../Crouch")
+
+[node name="Crouch" type="Node" parent="StateMachine" unique_id=595856149 node_paths=PackedStringArray("idle_state", "walk_state", "run_state", "jump_state", "fall_state", "crouch_state")]
+script = ExtResource("8_o4v1s")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+run_state = NodePath("../Run")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+crouch_state = NodePath(".")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1822624688]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=907013721]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="StateLabel" type="Panel" parent="CanvasLayer/Control" unique_id=557815624]
+visible = false
+layout_mode = 0
+offset_right = 341.0
+offset_bottom = 99.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/StateLabel" unique_id=983002294]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "State"
+label_settings = SubResource("LabelSettings_r4xyb")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crosshair" type="CenterContainer" parent="CanvasLayer/Control" unique_id=465600523]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.55, 0.55)
+pivot_offset = Vector2(36, 36)
+script = ExtResource("10_jynvv")
+
+[node name="Reticle" type="TextureRect" parent="CanvasLayer/Control/Crosshair" unique_id=76707084]
+layout_mode = 2
+texture = ExtResource("10_hacra")
+
+[node name="Hitmarker" type="TextureRect" parent="CanvasLayer/Control/Crosshair" unique_id=678875468]
+modulate = Color(1, 0, 0, 0)
+layout_mode = 2
+texture = ExtResource("12_lmeus")

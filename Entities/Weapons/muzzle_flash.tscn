@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dkb3c4k60i56b"]
+
+[ext_resource type="Texture2D" uid="uid://b0ayei3gxq0ck" path="res://Assets/Textures/MuzzleFlash.png" id="1_3rjym"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgo3s"]
+transparency = 1
+albedo_texture = ExtResource("1_3rjym")
+emission_enabled = true
+emission = Color(0.959375, 0.60476995, 0.17988282, 1)
+emission_energy_multiplier = 3.28
+
+[sub_resource type="Curve" id="Curve_3rjym"]
+_data = [Vector2(0, 0.560676), 0.0, 0.0, 0, 0, Vector2(0.7479893, 0.49758458), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_lgo3s"]
+curve = SubResource("Curve_3rjym")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vqrng"]
+emission_shape_offset = Vector3(0, 0.05, 0)
+angle_min = -89.99999
+angle_max = 90.000015
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_lgo3s")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6qik"]
+transparency = 4
+albedo_texture = ExtResource("1_3rjym")
+emission_enabled = true
+emission = Color(0.95625, 0.519961, 0, 1)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_7571n"]
+material = SubResource("StandardMaterial3D_r6qik")
+size = Vector2(0.25, 0.25)
+
+[node name="MuzzleFlash" type="GPUParticles3D" unique_id=920886274]
+material_override = SubResource("StandardMaterial3D_lgo3s")
+emitting = false
+amount = 4
+lifetime = 0.04
+one_shot = true
+explosiveness = 0.63
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_vqrng")
+draw_pass_1 = SubResource("QuadMesh_7571n")

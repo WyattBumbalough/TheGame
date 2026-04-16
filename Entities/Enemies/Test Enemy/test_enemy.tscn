@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://p02o66j1sv5w"]
+
+[ext_resource type="Script" uid="uid://bhqif5s7gmgge" path="res://Common/Components/HealthManager.gd" id="1_gwxsl"]
+[ext_resource type="Script" uid="uid://bwf0gap8hq2dh" path="res://Entities/Enemies/Test Enemy/test_enemy.gd" id="1_sy1v5"]
+[ext_resource type="Script" uid="uid://b42gefpubqsn2" path="res://Common/Components/hitbox_component.gd" id="2_r3irf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r3irf"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sy1v5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_42mst"]
+albedo_color = Color(1, 0.49365234, 0.046875, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sy1v5"]
+radius = 0.65
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sy1v5"]
+albedo_color = Color(0.6618274, 0.66875, 0.1149414, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_42mst"]
+material = SubResource("StandardMaterial3D_sy1v5")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fufpq"]
+radius = 0.6
+
+[node name="TestEnemy" type="CharacterBody3D" unique_id=1687142084]
+script = ExtResource("1_sy1v5")
+
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=438128472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_r3irf")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="." unique_id=1857494854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_sy1v5")
+surface_material_override/0 = SubResource("StandardMaterial3D_42mst")
+
+[node name="Hitbox" type="Area3D" parent="BodyMesh" unique_id=794778861 node_paths=PackedStringArray("health_manager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+script = ExtResource("2_r3irf")
+health_manager = NodePath("../../HealthManager")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyMesh/Hitbox" unique_id=874133361]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_sy1v5")
+debug_color = Color(0.70196074, 0.06580882, 0, 0.41960785)
+
+[node name="HealthManager" type="Node" parent="." unique_id=1681088500]
+script = ExtResource("1_gwxsl")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1116318935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0240364, 0)
+billboard = 1
+text = "100"
+font_size = 90
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1253510740]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+mesh = SubResource("SphereMesh_42mst")
+
+[node name="Hitbox" type="Area3D" parent="MeshInstance3D" unique_id=1194799662 node_paths=PackedStringArray("health_manager")]
+script = ExtResource("2_r3irf")
+health_manager = NodePath("../../HealthManager")
+critical = true
+metadata/_custom_type_script = "uid://b42gefpubqsn2"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Hitbox" unique_id=785464177]
+shape = SubResource("SphereShape3D_fufpq")
+debug_color = Color(0.70196074, 0, 0, 0.41960785)

@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://chqhfnoo3ovdy"]
+
+[ext_resource type="Texture2D" uid="uid://cqq1ahe0vih5s" path="res://Assets/Textures/Metal/metal_mp_3.png" id="1_xf8jo"]
+[ext_resource type="Texture2D" uid="uid://4mr264enemk8" path="res://Assets/Textures/Metal/metal_mp_1.png" id="2_npr5m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jynvv"]
+albedo_texture = ExtResource("1_xf8jo")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qa1vg"]
+albedo_texture = ExtResource("2_npr5m")
+
+[node name="Pipe" type="Node3D" unique_id=1807586010]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=385194180]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=2127314159]
+radius = 0.051
+height = 1.269
+material = SubResource("StandardMaterial3D_jynvv")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1616090699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56065917, 0)
+radius = 0.083
+height = 0.10825491
+material = SubResource("StandardMaterial3D_qa1vg")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=137851285]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38612342, 0)
+radius = 0.083
+height = 0.10825491
+material = SubResource("StandardMaterial3D_qa1vg")

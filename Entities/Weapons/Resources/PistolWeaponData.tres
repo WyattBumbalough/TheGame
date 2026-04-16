@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://05a5neu6lqst"]
+
+[ext_resource type="Script" uid="uid://i1iyutq4ctea" path="res://Entities/Weapons/weapon_data.gd" id="1_iw3h1"]
+[ext_resource type="PackedScene" uid="uid://dkb3c4k60i56b" path="res://Entities/Weapons/muzzle_flash.tscn" id="1_pxgqu"]
+
+[sub_resource type="Curve" id="Curve_iw3h1"]
+_data = [Vector2(0, 0.9545295), 0.0, -0.1282265, 0, 0, Vector2(0.078014195, 0.9545295), -0.075427204, -0.075427204, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[resource]
+script = ExtResource("1_iw3h1")
+weapon_name = "Pistol"
+weapon_id = 1
+weapon_damage = 5.0
+headshot_damage_multiplier = 25.0
+min_spread = -1.0
+max_spread = 1.0
+damage_dropoff = SubResource("Curve_iw3h1")
+max_ammo_capacity = 6
+ammo_type = "Pistol"
+current_ammo = 6
+current_reserve_ammo = 22
+equip_anim_name = "EquipPistol"
+equip_anim_speed = 1.5
+shoot_anim_name = "ShootPistol"
+shoot_anim_speed = 1.25
+equipped_position = Vector3(0.22352022, -0.21703298, -0.6494898)
+unequipped_position = Vector3(0.22352022, -0.6102679, -0.6494898)
+muzzle_flash_ref = ExtResource("1_pxgqu")
+metadata/_custom_type_script = "uid://i1iyutq4ctea"

@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://cbxp5f66m3mn"]
+
+[ext_resource type="PackedScene" uid="uid://cwjomq7poa3ul" path="res://Entities/Player/Player.tscn" id="1_f3sb7"]
+[ext_resource type="Texture2D" uid="uid://rmayf0x8a33v" path="res://Assets/Textures/Floor/tiles_floor_1.png" id="1_fj7yv"]
+[ext_resource type="Texture2D" uid="uid://c65ger3y6lgkb" path="res://Assets/Textures/Ceiling/ceiling_1.jpg" id="2_aqk2v"]
+[ext_resource type="Texture2D" uid="uid://c20ilql1a1m3u" path="res://Assets/Textures/Walls/wall_3.png" id="4_036b0"]
+[ext_resource type="PackedScene" uid="uid://p02o66j1sv5w" path="res://Entities/Enemies/Test Enemy/test_enemy.tscn" id="5_036b0"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_fj7yv"]
+sky_material = SubResource("ProceduralSkyMaterial_f3sb7")
+
+[sub_resource type="Environment" id="Environment_tlwt5"]
+background_mode = 2
+sky = SubResource("Sky_fj7yv")
+ambient_light_color = Color(0.49747366, 0.49747366, 0.49747366, 1)
+tonemap_mode = 2
+ssao_enabled = true
+glow_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_depth_begin = -43.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkg7o"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("4_036b0")
+uv1_scale = Vector3(0.27, 0.27, 0.27)
+uv1_offset = Vector3(-0.195, -0.125, 0)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
+diffuse_mode = 3
+albedo_texture = ExtResource("1_fj7yv")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_offset = Vector3(0.034, 0.056, 0.019)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwbse"]
+diffuse_mode = 2
+specular_mode = 1
+albedo_texture = ExtResource("2_aqk2v")
+uv1_scale = Vector3(0.15, 0.15, 0.15)
+uv1_triplanar = true
+texture_filter = 0
+
+[node name="World" type="Node3D" unique_id=964549835]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1394781879]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=134168710]
+environment = SubResource("Environment_tlwt5")
+
+[node name="Player" parent="." unique_id=222571555 instance=ExtResource("1_f3sb7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0252323, 0.2458297, -5.3370833)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1541768579]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+use_collision = true
+
+[node name="Wall2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=452041731]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.875, 2.375, -2.0901365)
+size = Vector3(21.25, 3.75, 0.5)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="Wall7" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1751958487]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.875, 2.375, -18.590137)
+size = Vector3(21.25, 3.75, 0.5)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="Wall3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1279719763]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 2.375, 3)
+size = Vector3(30, 3.75, 0.5)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="Wall8" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1313126177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 2.375, -23.5)
+size = Vector3(30, 3.75, 0.5)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="Wall4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=94099692]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 2.375, -10.375)
+size = Vector3(0.5, 3.75, 26.25)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="Wall5" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1565985977]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.247692, 2.388907, -10.496764)
+size = Vector3(0.5, 3.75, 26.5)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="Wall6" type="CSGBox3D" parent="CSGCombiner3D" unique_id=768057379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.247692, 2.388907, -10.309447)
+size = Vector3(0.5, 3.75, 15.874634)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="Wall9" type="CSGBox3D" parent="CSGCombiner3D" unique_id=384701926]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5023079, 2.388907, -10.309447)
+size = Vector3(0.5, 3.75, 15.874634)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="Wall10" type="CSGBox3D" parent="CSGCombiner3D/Wall9" unique_id=1995013453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.375, 0.3126831)
+operation = 2
+size = Vector3(1.75, 3, 3.25)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="." unique_id=130102657]
+use_collision = true
+metadata/_edit_group_ = true
+
+[node name="Floor" type="CSGBox3D" parent="CSGCombiner3D2" unique_id=1228049615]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.125, -0.125, -7.375)
+use_collision = true
+size = Vector3(34.5, 0.75, 41.25)
+material = SubResource("StandardMaterial3D_tlwt5")
+metadata/_edit_group_ = true
+
+[node name="Ceiling" type="CSGBox3D" parent="CSGCombiner3D2" unique_id=1122636945]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.125, 3.875, -7.375)
+use_collision = true
+size = Vector3(34.5, 0.75, 41.25)
+material = SubResource("StandardMaterial3D_dwbse")
+metadata/_edit_group_ = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=658501215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5245783)
+
+[node name="TestEnemy" parent="." unique_id=1687142084 instance=ExtResource("5_036b0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.817678, -4.7683716e-07, -8.367292)
