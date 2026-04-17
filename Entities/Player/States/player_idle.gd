@@ -1,6 +1,10 @@
 extends PlayerState
 
 
+func enter(_previous_state: State):
+	character.bob_anims.play("WeaponIdle", 0.25)
+
+
 func handle_physics(_delta) -> State:
 	character.handle_movement(speed, accel, friction)
 	

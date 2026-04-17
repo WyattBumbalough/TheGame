@@ -33,6 +33,64 @@ albedo_color = Color(0.10224319, 0.10224321, 0.10224321, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_r4xyb"]
 font_size = 50
 
+[sub_resource type="Animation" id="Animation_lmeus"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera/WeaponBob:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.060474277, 0.042397022, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_061yh"]
+resource_name = "WeaponBob"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera/WeaponBob:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(0.5, 2, 0.5, 2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.060474277, 0.042397022, 0), Vector3(0, 0, 0), Vector3(0.084655166, 0.026283026, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uw7o4"]
+resource_name = "WeaponIdle"
+length = 2.25
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera/WeaponBob:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.028378963, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gallu"]
+_data = {
+&"RESET": SubResource("Animation_lmeus"),
+&"WeaponBob": SubResource("Animation_061yh"),
+&"WeaponIdle": SubResource("Animation_uw7o4")
+}
+
 [node name="Player" type="CharacterBody3D" unique_id=222571555]
 script = ExtResource("1_2v7dq")
 allow_sprint = false
@@ -58,7 +116,10 @@ cull_mask = 524287
 attributes = SubResource("CameraAttributesPractical_2v7dq")
 fov = 65.0
 
-[node name="WeaponManager" parent="Head/Camera" unique_id=1460823030 instance=ExtResource("2_761t5")]
+[node name="WeaponBob" type="Node3D" parent="Head/Camera" unique_id=1431017574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.060474277, 0.042397022, 0)
+
+[node name="WeaponManager" parent="Head/Camera/WeaponBob" unique_id=1460823030 instance=ExtResource("2_761t5")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Head" unique_id=976964842]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, -0.0897913, 0)
@@ -190,3 +251,7 @@ texture = ExtResource("10_hacra")
 modulate = Color(1, 0, 0, 0)
 layout_mode = 2
 texture = ExtResource("12_lmeus")
+
+[node name="BobAnims" type="AnimationPlayer" parent="." unique_id=1121762120]
+libraries/ = SubResource("AnimationLibrary_gallu")
+autoplay = &"WeaponIdle"

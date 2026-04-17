@@ -18,5 +18,3 @@ func take_damage(amount: float):
 	damage_taken.emit(amount)
 	if current_health <= 0.0:
 		no_health.emit()
-	
-	print("ow")

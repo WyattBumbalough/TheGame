@@ -25,6 +25,7 @@ const SENS = .002
 @onready var camera: Camera3D = %Camera
 @onready var state_machine: StateMachine = %StateMachine
 @onready var crosshair: Crosshair = %Crosshair
+@onready var bob_anims: AnimationPlayer = $BobAnims
 
 
 var input_direction: Vector2

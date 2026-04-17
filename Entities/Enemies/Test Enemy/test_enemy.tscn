@@ -21,7 +21,7 @@ albedo_color = Color(0.6618274, 0.66875, 0.1149414, 1)
 material = SubResource("StandardMaterial3D_sy1v5")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fufpq"]
-radius = 0.6
+radius = 0.488
 
 [node name="TestEnemy" type="CharacterBody3D" unique_id=1687142084]
 script = ExtResource("1_sy1v5")

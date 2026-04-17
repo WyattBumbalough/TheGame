@@ -6,7 +6,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcmls"]
 shading_mode = 0
-albedo_color = Color(0.975, 1, 0.19999999, 1)
+albedo_color = Color(0.9764706, 1, 0.2, 0.2627451)
 
 [node name="TestDecal" type="Node3D" unique_id=1210449275]
 script = ExtResource("1_lcmls")

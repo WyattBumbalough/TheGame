@@ -197,6 +197,7 @@ barrel_point = NodePath("PistolModel/Marker")
 metadata/_custom_type_script = "uid://byxrd0b7bduam"
 
 [node name="PistolModel" type="Node3D" parent="RightHand/Pistol" unique_id=230872164]
+transform = Transform3D(1, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000002, 0.14108825, -0.013746053, 0.00043201447)
 
 [node name="PistolMesh" type="MeshInstance3D" parent="RightHand/Pistol/PistolModel" unique_id=2061608598]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.0005162358, 0.0011563301, -0.00038141012)
@@ -211,7 +212,7 @@ sides = 10
 material = SubResource("StandardMaterial3D_4rrlr")
 
 [node name="Marker" type="Marker3D" parent="RightHand/Pistol/PistolModel" unique_id=1769219102]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.060825795, -0.50653654)
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.0076984167, 0.060825795, -0.50653654)
 
 [node name="Shotgun" type="Node3D" parent="RightHand" unique_id=1367591796 node_paths=PackedStringArray("weapon_model")]
 transform = Transform3D(1, 0, 0, 0, 0.7965616, 0.6045574, 0, -0.6045574, 0.7965616, 0.30721074, -0.33868733, -0.95113575)
@@ -272,7 +273,7 @@ mesh = SubResource("ArrayMesh_vsa0j")
 [node name="LeftHand" type="Node3D" parent="." unique_id=1226825114]
 
 [node name="Pipe" parent="LeftHand" unique_id=1807586010 instance=ExtResource("2_rakqe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54595816, -0.2715199, -0.74152225)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6307285, -0.2715199, -0.91802853)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1863050811]
 unique_name_in_owner = true
