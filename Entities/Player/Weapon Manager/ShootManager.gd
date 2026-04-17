@@ -47,17 +47,15 @@ func hitscan():
 	var spread = Vector3(rng.randf_range(cw.min_spread, cw.max_spread), rng.randf_range(cw.min_spread, cw.max_spread), rng.randf_range(cw.min_spread, cw.max_spread))
 	
 	var camera: Camera3D = Refs.PLAYER.camera
-	var window: Window = get_window()
-	var viewport: Vector2i
 	var space_state: PhysicsDirectSpaceState3D = camera.get_world_3d().direct_space_state
 	var screen_center: Vector2 = get_viewport().size / 2
 	
 	var origin: Vector3 = camera.project_ray_origin(screen_center)
 	var end: Vector3 = origin + camera.project_ray_normal(screen_center) * 1000
 	var query = PhysicsRayQueryParameters3D.create(origin, end + spread * 4)
+	
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
-	
 	var result: Dictionary = space_state.intersect_ray(query)
 	
 	if result:
@@ -65,7 +63,6 @@ func hitscan():
 		var collider_point: Vector3 = result.get("position")
 		var collider_normal: Vector3 = result.get("normal")
 		var final_damage: float
-		#print(collider_point)
 		weapon_manager.spawn_bullethole_decal(collider_point, collider_normal)
 		if collider is Hitbox:
 			
@@ -77,5 +74,4 @@ func hitscan():
 				final_damage = cw.weapon_damage
 				collider.take_damage(final_damage)
 		else:
-			
 			pass
