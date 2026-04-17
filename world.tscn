@@ -132,3 +132,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5245783)
 
 [node name="TestEnemy" parent="." unique_id=1687142084 instance=ExtResource("5_036b0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.817678, -4.7683716e-07, -8.367292)
+
+[node name="TestEnemy2" parent="." unique_id=172662360 instance=ExtResource("5_036b0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.24454, -4.7683716e-07, -22.524117)

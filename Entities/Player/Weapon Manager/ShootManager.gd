@@ -20,7 +20,6 @@ func shoot():
 		
 		cw.is_shooting = true
 		
-		
 		if cw.shoot_anim_name != "":
 			Refs.PLAYER.crosshair.tween_crosshair()
 			Refs.PLAYER.tween_cam_fov_up()
@@ -29,6 +28,7 @@ func shoot():
 			#sound.play(shoot)
 		else:
 			printerr("%s doesn't have a shoot animation." % cw.weapon_name)
+			
 		if !weapon_manager.infinite_ammo:
 			cw.current_ammo -= 1
 		# Number of projectiles fired at the same time. I.E. A shotgun shell will fire
@@ -47,11 +47,13 @@ func hitscan():
 	var spread = Vector3(rng.randf_range(cw.min_spread, cw.max_spread), rng.randf_range(cw.min_spread, cw.max_spread), rng.randf_range(cw.min_spread, cw.max_spread))
 	
 	var camera: Camera3D = Refs.PLAYER.camera
+	var window: Window = get_window()
+	var viewport: Vector2i
 	var space_state: PhysicsDirectSpaceState3D = camera.get_world_3d().direct_space_state
 	var screen_center: Vector2 = get_viewport().size / 2
 	
 	var origin: Vector3 = camera.project_ray_origin(screen_center)
-	var end: Vector3 = camera.project_ray_normal(screen_center) * 1000
+	var end: Vector3 = origin + camera.project_ray_normal(screen_center) * 1000
 	var query = PhysicsRayQueryParameters3D.create(origin, end + spread * 4)
 	query.collide_with_areas = true
 	query.collide_with_bodies = true

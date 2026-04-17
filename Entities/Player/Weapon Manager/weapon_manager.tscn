@@ -222,7 +222,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3962512, 0, -1.464206)
 light_color = Color(1, 0.8092735, 0.58074534, 1)
 light_energy = 0.0
 shadow_enabled = true
-omni_range = 15.0
+omni_range = 25.0
 omni_attenuation = 0.195
 
 [node name="RightHand" type="Node3D" parent="." unique_id=127206845]
