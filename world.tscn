@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://c65ger3y6lgkb" path="res://Assets/Textures/Ceiling/ceiling_1.jpg" id="2_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://c20ilql1a1m3u" path="res://Assets/Textures/Walls/wall_3.png" id="4_036b0"]
 [ext_resource type="PackedScene" uid="uid://p02o66j1sv5w" path="res://Entities/Enemies/Test Enemy/test_enemy.tscn" id="5_036b0"]
+[ext_resource type="Texture2D" uid="uid://eo1141j2wwi7" path="res://Assets/Textures/splat1.png" id="6_dwbse"]
+[ext_resource type="Texture2D" uid="uid://d3r6w8flf8fa" path="res://Assets/Textures/splat2.png" id="6_pkg7o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -135,3 +137,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.817678, -4.7683716e-07, -
 
 [node name="TestEnemy2" parent="." unique_id=172662360 instance=ExtResource("5_036b0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.24454, -4.7683716e-07, -22.524117)
+
+[node name="Decal" type="Decal" parent="." unique_id=1219037224]
+transform = Transform3D(0.2657749, 0, -0.9640351, 0.9632846, 0.039451685, 0.265568, 0.038032807, -0.9992215, 0.010485268, -4.8170805, 1.6178498, -1.7448177)
+size = Vector3(2, 1.605835, 2)
+texture_albedo = ExtResource("6_pkg7o")
+modulate = Color(0.46875, 0, 0, 1)
+
+[node name="Decal2" type="Decal" parent="." unique_id=1259157713]
+transform = Transform3D(0.90823257, 0.030189846, -0.41737512, 0.41673368, 0.025397012, 0.90867364, 0.038032796, -0.99922144, 0.010485265, -5.477619, 1.3307648, -1.7448177)
+size = Vector3(2, 1.605835, 2)
+texture_albedo = ExtResource("6_pkg7o")
+modulate = Color(0.46875, 0, 0, 1)
+
+[node name="Decal4" type="Decal" parent="." unique_id=1953860026]
+transform = Transform3D(0.99275076, 0.036585163, -0.11448759, -0.03803287, 0.99922144, -0.010485278, 0.114014894, 0.014763586, 0.99336934, -5.4430943, 0.20956026, -3.9441829)
+size = Vector3(4, 0.41823435, 3.0836792)
+texture_albedo = ExtResource("6_pkg7o")
+modulate = Color(0.46875, 0, 0, 1)
+
+[node name="Decal3" type="Decal" parent="." unique_id=797324782]
+transform = Transform3D(0.74118674, 0.021170644, -0.67096484, 0.6702205, 0.033290222, 0.7414149, 0.0380328, -0.99922144, 0.010485264, -6.9251328, 1.6561042, -1.7448177)
+size = Vector3(2, 1.605835, 2)
+texture_albedo = ExtResource("6_dwbse")
+modulate = Color(0.46875, 0, 0, 1)

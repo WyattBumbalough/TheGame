@@ -14,7 +14,10 @@
 [ext_resource type="Script" uid="uid://doqw7j7glj8lb" path="res://Entities/Player/Weapon Manager/ReloadManager.gd" id="12_4rrlr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqmo2"]
-albedo_color = Color(0.3232125, 0.3232125, 0.3232125, 1)
+albedo_texture = ExtResource("5_55cga")
+use_z_clip_scale = true
+z_clip_scale = 0.5
+use_fov_override = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_55cga"]
 _surfaces = [{
@@ -29,6 +32,9 @@ _surfaces = [{
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rrlr"]
 albedo_color = Color(0.625, 0.625, 0.625, 1)
+use_z_clip_scale = true
+z_clip_scale = 0.5
+use_fov_override = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqruy"]
 diffuse_mode = 3
@@ -189,7 +195,7 @@ omni_attenuation = 0.195
 unique_name_in_owner = true
 
 [node name="Pistol" type="Node3D" parent="RightHand" unique_id=1126944122 node_paths=PackedStringArray("weapon_model", "barrel_point")]
-transform = Transform3D(1, 0, 0, 0, 0.64412355, 0.7649213, 0, -0.7649213, 0.64412355, 0.22352022, -0.6102679, -0.6494898)
+transform = Transform3D(1, 0, 0, 0, 0.64412355, 0.76492125, 0, -0.76492125, 0.64412355, 0.22352022, -0.6102679, -0.6494898)
 script = ExtResource("2_ggl38")
 weapon_model = NodePath("PistolModel")
 weapon_id = 1
@@ -215,7 +221,7 @@ material = SubResource("StandardMaterial3D_4rrlr")
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.0076984167, 0.060825795, -0.50653654)
 
 [node name="Shotgun" type="Node3D" parent="RightHand" unique_id=1367591796 node_paths=PackedStringArray("weapon_model")]
-transform = Transform3D(1, 0, 0, 0, 0.7965616, 0.6045574, 0, -0.6045574, 0.7965616, 0.30721074, -0.33868733, -0.95113575)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.30721074, -0.33868733, -0.95113575)
 script = ExtResource("2_ggl38")
 weapon_model = NodePath("ShotgunModel")
 weapon_id = 2
@@ -271,6 +277,7 @@ material = SubResource("StandardMaterial3D_stskr")
 mesh = SubResource("ArrayMesh_vsa0j")
 
 [node name="LeftHand" type="Node3D" parent="." unique_id=1226825114]
+visible = false
 
 [node name="Pipe" parent="LeftHand" unique_id=1807586010 instance=ExtResource("2_rakqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6307285, -0.2715199, -0.91802853)
@@ -293,6 +300,9 @@ unique_name_in_owner = true
 script = ExtResource("11_koiay")
 anims = NodePath("../AnimationPlayer")
 
-[node name="ReloadManager" type="Node" parent="." unique_id=974294483]
+[node name="ReloadManager" type="Node" parent="." unique_id=974294483 node_paths=PackedStringArray("weapon_manager", "ammo_manager", "anim_manager")]
 unique_name_in_owner = true
 script = ExtResource("12_4rrlr")
+weapon_manager = NodePath("..")
+ammo_manager = NodePath("../AmmoManager")
+anim_manager = NodePath("../AnimationsManager")

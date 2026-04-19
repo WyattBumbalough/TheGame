@@ -25,12 +25,13 @@ class_name WeaponManager
 @onready var ammo_manager: AmmoManager = %AmmoManager
 @onready var animations_manager: AnimManager = %AnimationsManager
 @onready var reload_manager: ReloadManager = $ReloadManager
+
 @onready var light_flash: OmniLight3D = %LightFlash
 
 
 # Spawn objects
-@onready var bullethole_decal: PackedScene = preload("res://Entities/Weapons/Decals/TestDecal.tscn")
-
+@onready var bullethole_decal: PackedScene = preload("res://Entities/Weapons/Decals/bullethole_decal.tscn")
+@onready var bloodhit_effect: PackedScene = preload("res://Entities/Weapons/Decals/bloodhit.tscn")
 
 var weapon_stack: Array[int] = [] # Weapons currently held by the player.
 var weapon_list: Dictionary = {} # All weapons available in game. {weapon name, weapon_id = resource}
@@ -93,6 +94,7 @@ func _enter_weapon(next_weapon: int):
 	# Pass the current weapon and its model to all the sub-managers.
 	shoot_manager.get_current_weapon(cw)
 	animations_manager.get_current_weapon(cw, cw_model)
+	reload_manager.get_current_weapon(cw)
 	
 	if cw.is_shooting: cw.is_shooting = false
 	if cw.is_reloading: cw.is_reloading = false
@@ -123,8 +125,16 @@ func spawn_bullethole_decal(_pos: Vector3, _normal: Vector3):
 	var instance: Node3D = bullethole_decal.instantiate()
 	get_tree().get_root().add_child(instance)
 	instance.global_position = _pos
+	instance.look_at(instance.global_transform.origin + _normal)
+	instance.rotate_object_local(Vector3.RIGHT, -PI/2)
+
+
+func spawn_bloodhit_effect(_pos: Vector3, _normal: Vector3):
+	var instance = bloodhit_effect.instantiate()
+	get_tree().get_root().add_child(instance)
+	instance.global_position = _pos
 	instance.look_at(_normal)
-	instance.rotate_object_local(Vector3(1.0, 0.0, 0.0,), 90)
+	#instance.rotate_object_local(Vector3.RIGHT, -PI/2)
 
 
 func spawn_muzzle_flash():
@@ -144,7 +154,11 @@ func spawn_muzzle_flash():
 	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.tween_property(light_flash, "light_energy", 0.0, 0.2)
-	
+
+
+func weapon_sound_player(sound_name: AudioStream, sound_speed: float):
+	pass
+
 
 func _weapon_inputs():
 	if Input.is_action_just_pressed(shoot_input): shoot_manager.shoot()

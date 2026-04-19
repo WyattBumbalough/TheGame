@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://8igoscwuwsmw"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6dk36"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n8qpe"]
+shading_mode = 0
+albedo_color = Color(0.9764706, 1, 0.2, 0.2627451)
+
+[node name="TestDecal" type="Node3D" unique_id=472192088]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=447310902]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+mesh = SubResource("SphereMesh_6dk36")
+surface_material_override/0 = SubResource("StandardMaterial3D_n8qpe")

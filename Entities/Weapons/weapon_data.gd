@@ -21,9 +21,21 @@ var is_shooting: bool = false
 @export var current_ammo: int
 @export var current_reserve_ammo: int
 
+@export_group("Sound Settings")
+@export var equip_sound: AudioStream
+@export var equip_sound_speed: float = 1.0
+@export var shoot_sound: AudioStream
+@export var shoot_sound_speed: float = 1.0
+@export var reload_sound: AudioStream
+@export var reload_sound_speed: float = 1.0
+@export var reload_finished_sound: AudioStream
+@export var reload_finished_sound_speed: float = 1.0
+
 @export_group("Reload Settings")
 var is_reloading: bool = false
-@export var reload_time: float
+@export var auto_reload: bool = false
+@export var reload_parts_needed: int = 1
+@export var time_per_reload_part: float = 0.3
 
 @export_group("Animation Settings")
 @export var equip_anim_name: String

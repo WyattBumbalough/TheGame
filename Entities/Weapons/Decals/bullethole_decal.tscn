@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://bxgsgmfc75esj"]
+
+[ext_resource type="Texture2D" uid="uid://djpxmuvbey2e5" path="res://Assets/Textures/bullet_hole.png" id="1_f345q"]
+[ext_resource type="Script" uid="uid://bcnfh1nim2yv1" path="res://Entities/Weapons/Decals/bullethole_decal.gd" id="2_apgy0"]
+[ext_resource type="Texture2D" uid="uid://b5p4c33ok5dvw" path="res://Assets/Textures/smoke1.png" id="2_mlgx8"]
+
+[sub_resource type="Curve" id="Curve_f345q"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.44082838, 0), 0.0, 0.0, 0, 0, Vector2(0.61538464, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_76smo"]
+curve = SubResource("Curve_f345q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mlgx8"]
+direction = Vector3(0, 0, -1)
+spread = 108.297
+initial_velocity_min = 8.0
+initial_velocity_max = 10.0
+scale_min = 0.75
+scale_max = 1.25
+scale_curve = SubResource("CurveTexture_76smo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apgy0"]
+albedo_color = Color(0.534375, 0.47940677, 0.4024512, 1)
+emission = Color(0.671875, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_si8io"]
+material = SubResource("StandardMaterial3D_apgy0")
+radius = 0.08
+height = 0.16
+radial_segments = 4
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_si8io"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.050980393)
+albedo_texture = ExtResource("2_mlgx8")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_apgy0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.050295867, 1), 2.0511987, 2.0511987, 0, 0, Vector2(0.61538464, 0.87125826), 0.0, 0.0, 0, 0, Vector2(0.8372781, 0.011028647), -1.5383992, -1.5383992, 0, 0, Vector2(0.89349115, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_si8io"]
+curve = SubResource("Curve_apgy0")
+
+[sub_resource type="Curve" id="Curve_go6rr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.39053255, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kuas4"]
+curve = SubResource("Curve_go6rr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_apgy0"]
+angle_min = 50.400013
+angle_max = 50.400013
+direction = Vector3(0, 0, -1)
+spread = 90.0
+initial_velocity_min = 0.19999999
+initial_velocity_max = 0.5
+angular_velocity_min = 9.999984
+angular_velocity_max = 14.999984
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_kuas4")
+alpha_curve = SubResource("CurveTexture_si8io")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrx8c"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.03529412)
+albedo_texture = ExtResource("2_mlgx8")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+grow = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_0gral"]
+material = SubResource("StandardMaterial3D_nrx8c")
+
+[node name="Decal" type="Decal" unique_id=1302397877]
+size = Vector3(0.5, 0.20336914, 0.5)
+texture_albedo = ExtResource("1_f345q")
+script = ExtResource("2_apgy0")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=2113626516]
+cast_shadow = 0
+emitting = false
+amount = 10
+lifetime = 2.0
+one_shot = true
+speed_scale = 1.25
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_mlgx8")
+draw_pass_1 = SubResource("SphereMesh_si8io")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="." unique_id=1193841810]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55831736)
+visible = false
+material_override = SubResource("StandardMaterial3D_si8io")
+amount = 4
+lifetime = 3.0
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_apgy0")
+draw_pass_1 = SubResource("QuadMesh_0gral")
