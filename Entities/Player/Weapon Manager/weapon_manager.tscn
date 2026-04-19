@@ -96,7 +96,7 @@ tracks/1/path = NodePath("RightHand/Pistol:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.26666668, 0.4, 0.5),
+"times": PackedFloat32Array(0, 0.26666668, 0.33841822, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(-0.8709193, 0, 0), Vector3(0.03141593, 0, 0), Vector3(0.08726646, 0, 0), Vector3(0.03141593, 0, 0)]
