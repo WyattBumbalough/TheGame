@@ -23,7 +23,7 @@ func shoot():
 		if cw.shoot_anim_name != "":
 			Refs.PLAYER.crosshair.tween_crosshair()
 			Refs.PLAYER.tween_cam_fov_up()
-			weapon_manager.spawn_muzzle_flash()
+			weapon_manager.spawn_muzzle_flash(cw.muzzle_flash_scale)
 			animations_manager.play_animation(cw.shoot_anim_name, cw.shoot_anim_speed)
 			#sound.play(shoot)
 		else:

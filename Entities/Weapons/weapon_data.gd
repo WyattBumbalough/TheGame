@@ -51,3 +51,4 @@ var is_reloading: bool = false
 
 @export_group("Muzzle Flash")
 @export var muzzle_flash_ref: PackedScene
+@export var muzzle_flash_scale:= Vector3(1.0, 1.0, 1.0)

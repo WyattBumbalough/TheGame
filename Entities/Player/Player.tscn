@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cwjomq7poa3ul"]
 
 [ext_resource type="Script" uid="uid://d3e6bfqrdanju" path="res://Entities/Player/player.gd" id="1_2v7dq"]
+[ext_resource type="Script" uid="uid://badg5hnd5c3x7" path="res://Entities/Player/CameraHolder.gd" id="2_061yh"]
 [ext_resource type="PackedScene" uid="uid://buyir3bb35s8g" path="res://Entities/Player/Weapon Manager/weapon_manager.tscn" id="2_761t5"]
 [ext_resource type="Script" uid="uid://dhxpybn3be11e" path="res://Common/State Machine/state_machine.gd" id="2_oeplr"]
 [ext_resource type="Script" uid="uid://b7buwxinxyh7i" path="res://Entities/Player/States/player_idle.gd" id="3_oeplr"]
@@ -38,7 +39,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Head/Camera/WeaponBob:position")
+tracks/0/path = NodePath("CameraHolder/Camera/WeaponBob:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -56,7 +57,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Head/Camera/WeaponBob:position")
+tracks/0/path = NodePath("CameraHolder/Camera/WeaponBob:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -74,7 +75,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Head/Camera/WeaponBob:position")
+tracks/0/path = NodePath("CameraHolder/Camera/WeaponBob:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -105,28 +106,32 @@ mesh = SubResource("CapsuleMesh_mvdsw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_2v7dq")
 
-[node name="Head" type="Node3D" parent="." unique_id=1586777397]
+[node name="CameraHolder" type="Node3D" parent="." unique_id=1586777397 node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7002048, 0)
+script = ExtResource("2_061yh")
+tilt_rotation = 0.1
+tilt_speed = 3.0
+player = NodePath("..")
 metadata/_edit_group_ = true
 
-[node name="Camera" type="Camera3D" parent="Head" unique_id=212456546]
+[node name="Camera" type="Camera3D" parent="CameraHolder" unique_id=212456546]
 unique_name_in_owner = true
 cull_mask = 524287
 attributes = SubResource("CameraAttributesPractical_2v7dq")
 fov = 65.0
 
-[node name="WeaponBob" type="Node3D" parent="Head/Camera" unique_id=1431017574]
+[node name="WeaponBob" type="Node3D" parent="CameraHolder/Camera" unique_id=1431017574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.060474277, 0.042397022, 0)
 
-[node name="WeaponManager" parent="Head/Camera/WeaponBob" unique_id=1460823030 instance=ExtResource("2_761t5")]
+[node name="WeaponManager" parent="CameraHolder/Camera/WeaponBob" unique_id=1460823030 instance=ExtResource("2_761t5")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Head" unique_id=976964842]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraHolder" unique_id=976964842]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, -0.0897913, 0)
 layers = 524288
 mesh = SubResource("SphereMesh_sbnxc")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/MeshInstance3D" unique_id=966979552]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraHolder/MeshInstance3D" unique_id=966979552]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.44189322, 0, 0.1291399, -0.3093412)
 layers = 524288
 mesh = SubResource("BoxMesh_oeplr")

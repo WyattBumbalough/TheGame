@@ -137,11 +137,12 @@ func spawn_bloodhit_effect(_pos: Vector3, _normal: Vector3):
 	#instance.rotate_object_local(Vector3.RIGHT, -PI/2)
 
 
-func spawn_muzzle_flash():
+func spawn_muzzle_flash(_scale: Vector3):
 	if cw.muzzle_flash_ref != null:
 		var instance = cw.muzzle_flash_ref.instantiate()
 		add_child(instance)
 		instance.global_position = cw.weapon_slot.barrel_point.global_position
+		instance.scale = _scale
 		instance.emitting = true
 	else:
 		push_error("% does not have a muzzle flash setup." % cw.weapon_name)

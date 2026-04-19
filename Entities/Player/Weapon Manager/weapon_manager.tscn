@@ -130,6 +130,33 @@ tracks/1/keys = {
 "values": [Vector3(-0.6492101, 0, 0), Vector3(-0.6492101, 0, 0), Vector3(0.6614798, 0, 0), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_kqers"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightHand/Shotgun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.30721074, -0.33868733, -0.6752724)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightHand/Shotgun:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.36589083, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_qrvt1"]
 resource_name = "ShootPistol"
 length = 0.4
@@ -158,11 +185,41 @@ tracks/1/keys = {
 "values": [Vector3(0.03141593, 0, 0), Vector3(0.5799517, 0, 0), Vector3(0.7891682, 0, 0), Vector3(-0.034906585, 0, 0), Vector3(0.03141593, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_t3a6m"]
+resource_name = "ShootShotgun"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightHand/Shotgun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.023920618, 0.14379184, 0.4),
+"transitions": PackedFloat32Array(1, 0.5, -2, 1),
+"update": 0,
+"values": [Vector3(0.30721074, -0.33868733, -0.95113575), Vector3(0.30721074, -0.33868733, -0.6752724), Vector3(0.30721074, -0.33012164, -0.6096019), Vector3(0.30721074, -0.33868733, -0.95113575)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightHand/Shotgun:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.012833471, 0.18375814, 0.4),
+"transitions": PackedFloat32Array(1, 1, 2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.36589083, 0, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_stskr"]
 _data = {
 &"EquipPistol": SubResource("Animation_eqruy"),
 &"EquipShotgun": SubResource("Animation_4rrlr"),
-&"ShootPistol": SubResource("Animation_qrvt1")
+&"RESET": SubResource("Animation_kqers"),
+&"ShootPistol": SubResource("Animation_qrvt1"),
+&"ShootShotgun": SubResource("Animation_t3a6m")
 }
 
 [node name="WeaponManager" type="Node3D" unique_id=1460823030 node_paths=PackedStringArray("starting_weapons")]
@@ -195,7 +252,7 @@ omni_attenuation = 0.195
 unique_name_in_owner = true
 
 [node name="Pistol" type="Node3D" parent="RightHand" unique_id=1126944122 node_paths=PackedStringArray("weapon_model", "barrel_point")]
-transform = Transform3D(1, 0, 0, 0, 0.64412355, 0.76492125, 0, -0.76492125, 0.64412355, 0.22352022, -0.6102679, -0.6494898)
+transform = Transform3D(1, 0, 0, 0, 0.99950635, -0.031410754, 0, 0.031410754, 0.99950635, 0.22352022, -0.21703298, -0.6494898)
 script = ExtResource("2_ggl38")
 weapon_model = NodePath("PistolModel")
 weapon_id = 1
@@ -204,6 +261,7 @@ metadata/_custom_type_script = "uid://byxrd0b7bduam"
 
 [node name="PistolModel" type="Node3D" parent="RightHand/Pistol" unique_id=230872164]
 transform = Transform3D(1, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000002, 0.14108825, -0.013746053, 0.00043201447)
+visible = false
 
 [node name="PistolMesh" type="MeshInstance3D" parent="RightHand/Pistol/PistolModel" unique_id=2061608598]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.0005162358, 0.0011563301, -0.00038141012)
@@ -220,15 +278,15 @@ material = SubResource("StandardMaterial3D_4rrlr")
 [node name="Marker" type="Marker3D" parent="RightHand/Pistol/PistolModel" unique_id=1769219102]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.0076984167, 0.060825795, -0.50653654)
 
-[node name="Shotgun" type="Node3D" parent="RightHand" unique_id=1367591796 node_paths=PackedStringArray("weapon_model")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.30721074, -0.33868733, -0.95113575)
+[node name="Shotgun" type="Node3D" parent="RightHand" unique_id=1367591796 node_paths=PackedStringArray("weapon_model", "barrel_point")]
+transform = Transform3D(1, 0, 0, 0, 0.9338054, -0.3577813, 0, 0.3577813, 0.9338054, 0.30721074, -0.33868733, -0.6752724)
 script = ExtResource("2_ggl38")
 weapon_model = NodePath("ShotgunModel")
 weapon_id = 2
+barrel_point = NodePath("Marker3D")
 metadata/_custom_type_script = "uid://byxrd0b7bduam"
 
 [node name="ShotgunModel" type="Node3D" parent="RightHand/Shotgun" unique_id=111643024]
-visible = false
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="RightHand/Shotgun/ShotgunModel" unique_id=623065]
 visible = false
@@ -275,6 +333,9 @@ material = SubResource("StandardMaterial3D_stskr")
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="RightHand/Shotgun/ShotgunModel" unique_id=634598128]
 mesh = SubResource("ArrayMesh_vsa0j")
+
+[node name="Marker3D" type="Marker3D" parent="RightHand/Shotgun" unique_id=788036388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0228419, -1.1048218)
 
 [node name="LeftHand" type="Node3D" parent="." unique_id=1226825114]
 visible = false

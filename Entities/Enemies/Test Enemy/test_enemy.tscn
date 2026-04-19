@@ -45,15 +45,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_sy1v5")
 debug_color = Color(0.70196074, 0.06580882, 0, 0.41960785)
 
-[node name="HealthManager" type="Node" parent="." unique_id=1681088500]
-script = ExtResource("1_gwxsl")
-
-[node name="Label3D" type="Label3D" parent="." unique_id=1116318935]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0240364, 0)
-billboard = 1
-text = "100"
-font_size = 90
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1253510740]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 mesh = SubResource("SphereMesh_42mst")
@@ -67,6 +58,15 @@ metadata/_custom_type_script = "uid://b42gefpubqsn2"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Hitbox" unique_id=785464177]
 shape = SubResource("SphereShape3D_fufpq")
 debug_color = Color(0.70196074, 0, 0, 0.41960785)
+
+[node name="HealthManager" type="Node" parent="." unique_id=1681088500]
+script = ExtResource("1_gwxsl")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1116318935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0240364, 0)
+billboard = 1
+text = "100"
+font_size = 90
 
 [node name="Rays" type="Node3D" parent="." unique_id=703425145]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

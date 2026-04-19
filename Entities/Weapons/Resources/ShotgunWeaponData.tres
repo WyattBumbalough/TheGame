@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://dg0wedetyp71l"]
 
 [ext_resource type="Script" uid="uid://i1iyutq4ctea" path="res://Entities/Weapons/weapon_data.gd" id="1_0ihqm"]
+[ext_resource type="PackedScene" uid="uid://dkb3c4k60i56b" path="res://Entities/Weapons/muzzle_flash.tscn" id="1_ras73"]
 
 [resource]
 script = ExtResource("1_0ihqm")
@@ -15,5 +16,9 @@ max_ammo_capacity = 10
 current_ammo = 10
 current_reserve_ammo = 10
 equip_anim_name = "EquipShotgun"
+shoot_anim_name = "ShootShotgun"
+shoot_anim_speed = 1.75
 equipped_position = Vector3(0.30721074, -0.33868733, -0.95113575)
+muzzle_flash_ref = ExtResource("1_ras73")
+muzzle_flash_scale = Vector3(2, 2, 2)
 metadata/_custom_type_script = "uid://i1iyutq4ctea"

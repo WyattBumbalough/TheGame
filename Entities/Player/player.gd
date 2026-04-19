@@ -21,7 +21,7 @@ const SENS = .002
 @export var allow_crouch: bool = true
 @export var allow_sprint: bool = true
 
-@onready var head: Node3D = %Head
+@onready var head: Node3D = %CameraHolder
 @onready var camera: Camera3D = %Camera
 @onready var state_machine: StateMachine = %StateMachine
 @onready var crosshair: Crosshair = %Crosshair
