@@ -20,36 +20,40 @@ func get_current_weapon(current_weapon: WeaponData):
 
 func _process(delta: float) -> void:
 	if cw.is_reloading and start_reload_timer and not force_reload_stop:
-		pass
+		reload_follow(delta)
 
 
 func reload():
 	reload_start()
 
 
+# Check that the player is able to reload and set all appropraite variables.
 func reload_start():
 	if !cw.is_reloading and ammo_manager.ammo[cw.ammo_type] > 0 and \
 	cw.current_ammo != cw.max_ammo_capacity and \
 	!cw.is_shooting:
 		cw.is_reloading = true
 		
-		if (cw.max_ammo_capacity % cw.reload_parts_needed) != 0:
-			push_error("Cannot insert % amount of ammo." % (cw.reload_parts_needed / cw.max_ammo_capacity))
-			cw.is_reloading = false
+		if cw.rounds_reload:
+			cw.reload_parts_needed = cw.max_ammo_capacity - cw.current_ammo
 		else:
-			current_part_index = 0
-			reload_time = cw.time_per_reload_part
-			force_reload_stop = false
-			play_sound_and_anim = true
-			start_reload_timer = true
+			cw.reload_parts_needed = 1
+
+		current_part_index = 0
+		reload_time = cw.time_per_reload_part
+		force_reload_stop = false
+		play_sound_and_anim = true
+		start_reload_timer = true
 	else:
 		print("Don't need to reload.")
 
 
+# Play sound and animations. 
 func reload_follow(delta: float):
 	if play_sound_and_anim:
 		play_sound_and_anim = false
 		weapon_manager.weapon_sound_player(cw.reload_sound, cw.reload_sound_speed)
+		
 		if cw.reload_anim_name != "":
 			anim_manager.play_animation(cw.reload_anim_name, cw.reload_anim_speed)
 		else:
@@ -58,15 +62,30 @@ func reload_follow(delta: float):
 	if reload_time > 0.0: reload_time -= delta
 	else:
 		if current_part_index < cw.reload_parts_needed:
-			if cw.reload_parts_needed == 1:
-				one_part_calc()
-			else:
+			if cw.rounds_reload:
 				multi_part_calc()
-			
+			else:
+				one_part_calc()
+		
 	
 func one_part_calc():
 	print("haven't done this yet.")
+	return
 
 
 func multi_part_calc():
-	print("aaa")
+	var ammo_to_refill = cw.max_ammo_capacity - cw.current_ammo
+	
+	if ammo_manager.ammo[cw.ammo_type] >= ammo_to_refill and \
+	cw.current_ammo <= cw.max_ammo_capacity - 1:
+		# Add number of ammo to the mag and subtract it from the ammo manager.
+		cw.current_ammo += 1
+		ammo_manager.ammo[cw.ammo_type] -= ammo_to_refill
+		reload_time = cw.time_per_reload_part
+		print(cw.current_ammo)
+	else:
+		print("not enough ammo in reserve, or magazine complete")
+		anim_manager.play_animation(cw.equip_anim_name, cw.equip_anim_speed)
+		cw.is_reloading = false
+		force_reload_stop = true
+	

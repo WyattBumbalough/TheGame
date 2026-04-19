@@ -22,6 +22,7 @@ equip_anim_name = "EquipPistol"
 equip_anim_speed = 1.5
 shoot_anim_name = "ShootPistol"
 shoot_anim_speed = 1.25
+reload_anim_name = "ReloadPistol"
 equipped_position = Vector3(0.22352022, -0.21703298, -0.6494898)
 unequipped_position = Vector3(0.22352022, -0.6102679, -0.6494898)
 muzzle_flash_ref = ExtResource("1_pxgqu")

@@ -34,6 +34,7 @@ var is_shooting: bool = false
 @export_group("Reload Settings")
 var is_reloading: bool = false
 @export var auto_reload: bool = false
+@export var rounds_reload: bool = true
 @export var reload_parts_needed: int = 1
 @export var time_per_reload_part: float = 0.3
 

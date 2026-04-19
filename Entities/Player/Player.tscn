@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c1ga7863m47nv" path="res://Assets/Reticles/crosshair007.png" id="10_hacra"]
 [ext_resource type="Script" uid="uid://blmqb163okhfp" path="res://Entities/Player/crosshair.gd" id="10_jynvv"]
 [ext_resource type="Texture2D" uid="uid://cldhmereu64ky" path="res://Assets/Reticles/crosshair051.png" id="12_lmeus"]
+[ext_resource type="Script" uid="uid://67usyoo3ah6k" path="res://Entities/Player/hud.gd" id="14_uw7o4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mvdsw"]
 
@@ -33,6 +34,34 @@ albedo_color = Color(0.10224319, 0.10224321, 0.10224321, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_r4xyb"]
 font_size = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_061yh"]
+content_margin_left = 25.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.19215687)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_uw7o4"]
+font_size = 46
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_gallu"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 4.0
+color = Color(0.5, 0.5, 0.5, 1)
+grow_begin = -5.0
+grow_end = -5.0
+vertical = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_samso"]
+font_size = 23
 
 [sub_resource type="Animation" id="Animation_lmeus"]
 length = 0.001
@@ -256,6 +285,55 @@ texture = ExtResource("10_hacra")
 modulate = Color(1, 0, 0, 0)
 layout_mode = 2
 texture = ExtResource("12_lmeus")
+
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=162397166 node_paths=PackedStringArray("weapon_manager")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("14_uw7o4")
+weapon_manager = NodePath("../../CameraHolder/Camera/WeaponBob/WeaponManager")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/HUD" unique_id=765894197]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_061yh")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HUD/PanelContainer" unique_id=621737849]
+layout_mode = 2
+theme_override_constants/separation = 13
+
+[node name="WepName" type="Label" parent="CanvasLayer/HUD/PanelContainer/HBoxContainer" unique_id=403444669]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pistol"
+label_settings = SubResource("LabelSettings_uw7o4")
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/HUD/PanelContainer/HBoxContainer" unique_id=1115067924]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_gallu")
+
+[node name="CurrentMag" type="Label" parent="CanvasLayer/HUD/PanelContainer/HBoxContainer" unique_id=1179442488]
+unique_name_in_owner = true
+layout_mode = 2
+text = "6"
+label_settings = SubResource("LabelSettings_uw7o4")
+
+[node name="Reserve" type="Label" parent="CanvasLayer/HUD/PanelContainer/HBoxContainer" unique_id=1280593096]
+unique_name_in_owner = true
+layout_mode = 2
+text = "32"
+label_settings = SubResource("LabelSettings_samso")
+vertical_alignment = 2
 
 [node name="BobAnims" type="AnimationPlayer" parent="." unique_id=1121762120]
 libraries/ = SubResource("AnimationLibrary_gallu")
