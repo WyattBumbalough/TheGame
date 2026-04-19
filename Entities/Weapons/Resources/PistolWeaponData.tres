@@ -21,6 +21,7 @@ current_ammo = 6
 current_reserve_ammo = 22
 reload_sound = ExtResource("2_y8ua8")
 reload_sound_speed = 1.25
+time_per_reload_part = 0.2
 equip_anim_name = "EquipPistol"
 equip_anim_speed = 1.5
 shoot_anim_name = "ShootPistol"

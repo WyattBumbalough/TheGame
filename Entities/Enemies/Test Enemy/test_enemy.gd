@@ -22,6 +22,7 @@ func spawn_blood(_arg):
 	rays.look_at(Vector3(player_pos.x, rays.global_position.y, player_pos.z))
 	
 	ray_front.force_raycast_update()
+	
 	if ray_front.is_colliding():
 		var col_point = ray_front.get_collision_point()
 		var col_normal = ray_front.get_collision_normal()

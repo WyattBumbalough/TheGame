@@ -74,5 +74,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9567325, 0)
 
 [node name="RayFront" type="RayCast3D" parent="Rays" unique_id=512578552]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8)
+enabled = false
 target_position = Vector3(0, 0, 3)

@@ -73,13 +73,13 @@ func one_part_calc():
 
 
 func multi_part_calc():
-	var ammo_to_refill = cw.max_ammo_capacity - cw.current_ammo
-	
-	if ammo_manager.ammo[cw.ammo_type] >= ammo_to_refill and \
+	#var ammo_to_refill = cw.max_ammo_capacity - cw.current_ammo
+
+	if ammo_manager.ammo[cw.ammo_type] > 0 and \
 	cw.current_ammo <= cw.max_ammo_capacity - 1:
 		# Add number of ammo to the mag and subtract it from the ammo manager.
 		cw.current_ammo += 1
-		ammo_manager.ammo[cw.ammo_type] -= ammo_to_refill
+		ammo_manager.ammo[cw.ammo_type] -= 1
 		reload_time = cw.time_per_reload_part
 		weapon_manager.weapon_sound_player(cw.reload_sound, cw.reload_sound_speed)
 	else:

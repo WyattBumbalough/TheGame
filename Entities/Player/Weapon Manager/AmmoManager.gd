@@ -1,8 +1,9 @@
 extends Node
 class_name AmmoManager
 
-
-var ammo: Dictionary = { # Key = ammo type, value = ammo starting amount.
+# Currently held ammo of each type
+# Key = ammo_type, value = ammo starting amount.
+var ammo: Dictionary = { 
 	"Pistol": 26,
 	"Shells": 12,
 	"SMG": 40,
