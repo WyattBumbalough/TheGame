@@ -2,7 +2,7 @@
 extends Node3D
 class_name WeaponManager
 
-@export var weapon_resources: Array[WeaponData]
+@export var weapon_resources: Array[WeaponData] # Store weapon data for all weapons in an array.
 @export var starting_weapons: Array[WeaponSlot]
 @export var infinite_ammo: bool = false
 
@@ -16,18 +16,18 @@ class_name WeaponManager
 @export var slot_3: String
 @export var slot_4: String
 
+# Node refs
 @onready var right_hand: Node3D = %RightHand
 @onready var left_hand: Node3D = $LeftHand
 @onready var anims: AnimationPlayer = %AnimationPlayer
+@onready var audio: AudioStreamPlayer = %Audio
+@onready var light_flash: OmniLight3D = %LightFlash
 
 # Sub-managers
 @onready var shoot_manager: ShootManager = $ShootManager
 @onready var ammo_manager: AmmoManager = %AmmoManager
 @onready var animations_manager: AnimManager = %AnimationsManager
 @onready var reload_manager: ReloadManager = $ReloadManager
-
-@onready var light_flash: OmniLight3D = %LightFlash
-
 
 # Spawn objects
 @onready var bullethole_decal: PackedScene = preload("res://Entities/Weapons/Decals/bullethole_decal.tscn")
@@ -158,7 +158,9 @@ func spawn_muzzle_flash(_scale: Vector3):
 
 
 func weapon_sound_player(sound_name: AudioStream, sound_speed: float):
-	pass
+	audio.stream = sound_name
+	audio.pitch_scale = sound_speed
+	audio.play()
 
 
 func _weapon_inputs():

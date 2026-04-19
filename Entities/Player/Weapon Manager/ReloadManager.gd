@@ -52,7 +52,6 @@ func reload_start():
 func reload_follow(delta: float):
 	if play_sound_and_anim:
 		play_sound_and_anim = false
-		weapon_manager.weapon_sound_player(cw.reload_sound, cw.reload_sound_speed)
 		
 		if cw.reload_anim_name != "":
 			anim_manager.play_animation(cw.reload_anim_name, cw.reload_anim_speed)
@@ -82,7 +81,7 @@ func multi_part_calc():
 		cw.current_ammo += 1
 		ammo_manager.ammo[cw.ammo_type] -= ammo_to_refill
 		reload_time = cw.time_per_reload_part
-		print(cw.current_ammo)
+		weapon_manager.weapon_sound_player(cw.reload_sound, cw.reload_sound_speed)
 	else:
 		print("not enough ammo in reserve, or magazine complete")
 		anim_manager.play_animation(cw.equip_anim_name, cw.equip_anim_speed)

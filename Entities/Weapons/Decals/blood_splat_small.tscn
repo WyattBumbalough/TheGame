@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dm4shqagc8lst"]
+
+[ext_resource type="Texture2D" uid="uid://eo1141j2wwi7" path="res://Assets/Textures/splat1.png" id="1_nmynm"]
+[ext_resource type="Texture2D" uid="uid://d3r6w8flf8fa" path="res://Assets/Textures/splat2.png" id="2_yfmeh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2raf3"]
+size = Vector3(10, 1, 10)
+
+[node name="BloodDecalSmall" type="Node3D" unique_id=1167825252]
+
+[node name="Decal" type="Decal" parent="." unique_id=841235667]
+size = Vector3(1.5, 0.2890625, 1.5)
+texture_albedo = ExtResource("1_nmynm")
+modulate = Color(0.65625, 0, 0, 1)
+
+[node name="Decal2" type="Decal" parent="." unique_id=342315159]
+transform = Transform3D(0.4513293, 0, 0.89235747, 0, 1, 0, -0.89235747, 0, 0.4513293, 0.21787265, 0, -0.17932743)
+size = Vector3(1.5, 0.4729004, 1.5)
+texture_albedo = ExtResource("2_yfmeh")
+modulate = Color(0.65625, 0, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1180295663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.52790064, 0)
+visible = false
+mesh = SubResource("BoxMesh_2raf3")

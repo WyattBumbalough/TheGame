@@ -69,16 +69,10 @@ text = "100"
 font_size = 90
 
 [node name="Rays" type="Node3D" parent="." unique_id=703425145]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
-[node name="RayLeft" type="RayCast3D" parent="Rays" unique_id=2094545816]
-target_position = Vector3(-3, 0, 0)
-
-[node name="RayRight" type="RayCast3D" parent="Rays" unique_id=381531926]
-target_position = Vector3(3, 0, 0)
-
-[node name="RayBack" type="RayCast3D" parent="Rays" unique_id=573241732]
-target_position = Vector3(0, 0, 3)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9567325, 0)
 
 [node name="RayFront" type="RayCast3D" parent="Rays" unique_id=512578552]
-target_position = Vector3(0, 0, -3)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.8)
+target_position = Vector3(0, 0, 3)
