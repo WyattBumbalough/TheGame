@@ -23,6 +23,13 @@ material = SubResource("StandardMaterial3D_sy1v5")
 [sub_resource type="SphereShape3D" id="SphereShape3D_fufpq"]
 radius = 0.488
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fufpq"]
+albedo_color = Color(0.15937501, 0.15937501, 0.15937501, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0nu2d"]
+material = SubResource("StandardMaterial3D_fufpq")
+size = Vector3(0.578, 0.246, 0.39)
+
 [node name="TestEnemy" type="CharacterBody3D" unique_id=1687142084]
 script = ExtResource("1_sy1v5")
 
@@ -45,19 +52,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_sy1v5")
 debug_color = Color(0.70196074, 0.06580882, 0, 0.41960785)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1253510740]
+[node name="Head" type="MeshInstance3D" parent="." unique_id=1253510740]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 mesh = SubResource("SphereMesh_42mst")
 
-[node name="Hitbox" type="Area3D" parent="MeshInstance3D" unique_id=1194799662 node_paths=PackedStringArray("health_manager")]
+[node name="Hitbox" type="Area3D" parent="Head" unique_id=1194799662 node_paths=PackedStringArray("health_manager")]
 script = ExtResource("2_r3irf")
 health_manager = NodePath("../../HealthManager")
 critical = true
 metadata/_custom_type_script = "uid://b42gefpubqsn2"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Hitbox" unique_id=785464177]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Hitbox" unique_id=785464177]
 shape = SubResource("SphereShape3D_fufpq")
 debug_color = Color(0.70196074, 0, 0, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head" unique_id=1138260269]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.072577715, -0.36869502)
+mesh = SubResource("BoxMesh_0nu2d")
 
 [node name="HealthManager" type="Node" parent="." unique_id=1681088500]
 script = ExtResource("1_gwxsl")
@@ -75,4 +86,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9567325, 0)
 [node name="RayFront" type="RayCast3D" parent="Rays" unique_id=512578552]
 unique_name_in_owner = true
 enabled = false
-target_position = Vector3(0, 0, 3)
+target_position = Vector3(0, 0, 5)

@@ -321,6 +321,7 @@ transform = Transform3D(1, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000002, 0.14108825, -
 
 [node name="PistolMesh" type="MeshInstance3D" parent="RightHand/Pistol/PistolModel" unique_id=2061608598]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.0005162358, 0.0011563301, -0.00038141012)
+layers = 2
 material_override = SubResource("StandardMaterial3D_xqmo2")
 mesh = SubResource("ArrayMesh_55cga")
 

@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://dglo4a23muyav"]
+
+[ext_resource type="Script" uid="uid://c3y7ptxqmwfey" path="res://Entities/Effects/giblets.gd" id="1_ewnb4"]
+[ext_resource type="Texture2D" uid="uid://dfdftuywvqhvs" path="res://Assets/Textures/blood1.png" id="1_gwlap"]
+[ext_resource type="Texture2D" uid="uid://eo1141j2wwi7" path="res://Assets/Textures/splat1.png" id="3_4l751"]
+[ext_resource type="Texture2D" uid="uid://ypnn1tli56hg" path="res://Assets/Textures/splat_3.png" id="4_pxaf5"]
+[ext_resource type="Texture2D" uid="uid://d3r6w8flf8fa" path="res://Assets/Textures/splat2.png" id="5_n0hlc"]
+
+[sub_resource type="Curve" id="Curve_g6n1v"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.50572085, 0.9473684), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hla27"]
+curve = SubResource("Curve_g6n1v")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ewnb4"]
+angle_min = 1.0728835e-05
+angle_max = 3.0000107
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 6.0
+scale_min = 0.5
+scale_max = 2.0
+color = Color(1, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_hla27")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.24999997
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6n1v"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_gwlap")
+
+[sub_resource type="SphereMesh" id="SphereMesh_hla27"]
+material = SubResource("StandardMaterial3D_g6n1v")
+radius = 0.1
+height = 0.16
+radial_segments = 5
+rings = 2
+
+[sub_resource type="Gradient" id="Gradient_4l751"]
+colors = PackedColorArray(1, 1, 1, 1, 0.16250002, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pxaf5"]
+gradient = SubResource("Gradient_4l751")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n0hlc"]
+angle_min = 1.0728835e-05
+angle_max = 3.0000107
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 6.0
+scale_min = 0.5
+scale_max = 2.0
+color = Color(0.49374998, 0, 0, 1)
+color_ramp = SubResource("GradientTexture1D_pxaf5")
+alpha_curve = SubResource("CurveTexture_hla27")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.24999997
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x1tk1"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0, 0, 1)
+billboard_mode = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n5dsm"]
+material = SubResource("StandardMaterial3D_x1tk1")
+size = Vector2(0.05, 0.05)
+orientation = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_x1tk1"]
+size = Vector3(10, 1, 10)
+
+[node name="Giblets" type="Node3D" unique_id=1426305370]
+script = ExtResource("1_ewnb4")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=175282740]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6586109, 0)
+emitting = false
+amount = 50
+lifetime = 15.0
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ewnb4")
+draw_pass_1 = SubResource("SphereMesh_hla27")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="." unique_id=973737475]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6586109, 0)
+emitting = false
+amount = 250
+lifetime = 15.0
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_n0hlc")
+draw_pass_1 = SubResource("PlaneMesh_n5dsm")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." unique_id=261164169]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(10.0703125, 2, 11.6015625)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=792638431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+mesh = SubResource("BoxMesh_x1tk1")
+
+[node name="Decal" type="Decal" parent="." unique_id=596674370]
+transform = Transform3D(0.798, 0, 0, 0, 0.798, 0, 0, 0, 0.798, 0, -0.7885498, 0)
+size = Vector3(4, 2, 4)
+texture_albedo = ExtResource("3_4l751")
+modulate = Color(0.540625, 0, 0, 1)
+upper_fade = 1e-05
+lower_fade = 3.6621226e-05
+
+[node name="Decal2" type="Decal" parent="." unique_id=1000515654]
+transform = Transform3D(0.7852223, 0, 0.14223193, 0, 0.798, 0, -0.14223193, 0, 0.7852223, 1.010439, -0.7885498, 1.8518513)
+size = Vector3(4, 2, 4)
+texture_albedo = ExtResource("4_pxaf5")
+modulate = Color(0.540625, 0, 0, 1)
+upper_fade = 1e-05
+lower_fade = 3.6621226e-05
+
+[node name="Decal4" type="Decal" parent="." unique_id=1152833300]
+transform = Transform3D(0.10658967, 0, -0.79084927, 0, 0.798, 0, 0.79084927, 0, 0.10658967, -1.3098439, -0.7885498, 1.0781494)
+size = Vector3(4, 2, 4)
+texture_albedo = ExtResource("4_pxaf5")
+modulate = Color(0.540625, 0, 0, 1)
+upper_fade = 1e-05
+lower_fade = 3.6621226e-05
+
+[node name="Decal3" type="Decal" parent="." unique_id=110718426]
+transform = Transform3D(-0.1266778, 0, 0.78788114, 0, 0.798, 0, -0.78788114, 0, -0.1266778, -0.2640344, -0.7885498, 0.2593596)
+size = Vector3(4, 2, 4)
+texture_albedo = ExtResource("5_n0hlc")
+modulate = Color(0.540625, 0, 0, 1)
+upper_fade = 1e-05
+lower_fade = 3.6621226e-05
