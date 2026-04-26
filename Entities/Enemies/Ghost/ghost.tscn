@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://beocxc1lkfxiy" path="res://Entities/Enemies/EnemyBase.gd" id="1_0etef"]
 [ext_resource type="Resource" uid="uid://ddovssel0kikx" path="res://Entities/Enemies/Ghost/e_ghost_data.tres" id="2_hcida"]
 [ext_resource type="Script" uid="uid://bhqif5s7gmgge" path="res://Common/Components/HealthManager.gd" id="3_hil1s"]
+[ext_resource type="Script" uid="uid://b42gefpubqsn2" path="res://Common/Components/HitboxComponent.gd" id="5_hcida"]
 [ext_resource type="Script" uid="uid://c0qum5r64hh0" path="res://Common/Components/MovementComponent.gd" id="6_hil1s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_taegf"]
@@ -13,7 +14,10 @@
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.18039216)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hil1s"]
+
 [node name="Ghost" type="CharacterBody3D" unique_id=647086594 node_paths=PackedStringArray("nav_agent", "movement_component", "health_component", "sight_raycast")]
+collision_layer = 2
 script = ExtResource("1_0etef")
 enemy_data = ExtResource("2_hcida")
 max_detection_range = 20.0
@@ -27,6 +31,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_taegf")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1489480607]
+debug_enabled = true
+debug_path_custom_color = Color(1, 0.040624976, 0.040624976, 1)
 
 [node name="Visuals" type="Node3D" parent="." unique_id=2047277738]
 
@@ -50,5 +56,14 @@ metadata/_custom_type_script = "uid://c0qum5r64hh0"
 
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=1482213533]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-enabled = false
 target_position = Vector3(0, 0, -1)
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=1273788229 node_paths=PackedStringArray("health_manager")]
+script = ExtResource("5_hcida")
+health_manager = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://b42gefpubqsn2"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=617297310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_hil1s")
+debug_color = Color(0.70196074, 0.118455864, 0, 0.41960785)

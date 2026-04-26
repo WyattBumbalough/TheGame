@@ -13,4 +13,5 @@ func update(_delta: float) -> void:
 		return
 	
 	body.velocity.x = direction.x * speed
-	body.velocity.z = direction.y * speed
+	body.velocity.z = direction.z * speed
+	body.move_and_slide()

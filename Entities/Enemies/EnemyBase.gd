@@ -34,7 +34,7 @@ func _setup():
 	health_component.no_health.connect(_on_killed)
 	
 	sight_raycast.enabled = false
-	sight_raycast.target_position.z = -max_detection_range
+	sight_raycast.target_position = Vector3(0.0, 0.0, -max_detection_range)
 	
 	# Allow one physics tick before changing nav agent properties to avoid weird errors.
 	await get_tree().physics_frame
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			time += delta
 		
-		var _dir: Vector3 = nav_agent.get_next_path_position()
+		var _dir: Vector3 = global_position.direction_to(nav_agent.get_next_path_position())
 		if _dir and can_move:
 			movement_component.direction = _dir
 			movement_component.update(delta)

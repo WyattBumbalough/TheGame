@@ -54,6 +54,7 @@ func hitscan():
 	var end: Vector3 = origin + camera.project_ray_normal(screen_center) * 1000
 	var query = PhysicsRayQueryParameters3D.create(origin, end + spread * 4)
 	
+	query.collision_mask = 1
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
 	var result: Dictionary = space_state.intersect_ray(query)
