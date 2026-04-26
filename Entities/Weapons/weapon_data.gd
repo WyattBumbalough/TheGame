@@ -26,6 +26,8 @@ var is_shooting: bool = false
 @export var equip_sound_speed: float = 1.0
 @export var shoot_sound: AudioStream
 @export var shoot_sound_speed: float = 1.0
+@export var reload_start_sound: AudioStream
+@export var reload_start_sound_speed: float = 1.0
 @export var reload_sound: AudioStream
 @export var reload_sound_speed: float = 1.0
 @export var reload_finished_sound: AudioStream

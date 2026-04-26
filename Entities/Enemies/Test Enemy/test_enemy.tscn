@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bhqif5s7gmgge" path="res://Common/Components/HealthManager.gd" id="1_gwxsl"]
 [ext_resource type="Script" uid="uid://bwf0gap8hq2dh" path="res://Entities/Enemies/Test Enemy/test_enemy.gd" id="1_sy1v5"]
-[ext_resource type="Script" uid="uid://b42gefpubqsn2" path="res://Common/Components/hitbox_component.gd" id="2_r3irf"]
+[ext_resource type="Script" uid="uid://b42gefpubqsn2" path="res://Common/Components/HitboxComponent.gd" id="2_r3irf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r3irf"]
 

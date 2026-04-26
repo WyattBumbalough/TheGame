@@ -25,7 +25,7 @@ func shoot():
 			Refs.PLAYER.tween_cam_fov_up()
 			weapon_manager.spawn_muzzle_flash(cw.muzzle_flash_scale)
 			animations_manager.play_animation(cw.shoot_anim_name, cw.shoot_anim_speed)
-			#sound.play(shoot)
+			weapon_manager.weapon_sound_player(cw.shoot_sound, cw.shoot_sound_speed)
 		else:
 			printerr("%s doesn't have a shoot animation." % cw.weapon_name)
 			

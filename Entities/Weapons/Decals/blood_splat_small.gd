@@ -11,4 +11,4 @@ func _ready() -> void:
 	
 	decal.rotation.y = randf_range(deg_to_rad(0.0), deg_to_rad(180.0))
 	decal.texture_albedo = t
-	decal.scale = Vector3(rand_size,rand_size,decal.size.z)
+	#decal.scale = Vector3(rand_size,rand_size,decal.size.z)

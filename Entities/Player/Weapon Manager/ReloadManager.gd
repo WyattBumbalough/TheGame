@@ -55,6 +55,7 @@ func reload_follow(delta: float):
 		
 		if cw.reload_anim_name != "":
 			anim_manager.play_animation(cw.reload_anim_name, cw.reload_anim_speed)
+			#weapon_manager.weapon_sound_player(cw.reload_start_sound, cw.reload_sound_speed)
 		else:
 			print("%s does not have a reload animation." % cw.weapon_name)
 	

@@ -24,6 +24,9 @@ const SENS = .002
 @onready var head: Node3D = %CameraHolder
 @onready var camera: Camera3D = %Camera
 @onready var state_machine: StateMachine = %StateMachine
+@onready var health_manager: HealthManager = %HealthManager
+@onready var hitbox: Hitbox = %Hitbox
+
 @onready var crosshair: Crosshair = %Crosshair
 @onready var bob_anims: AnimationPlayer = $BobAnims
 

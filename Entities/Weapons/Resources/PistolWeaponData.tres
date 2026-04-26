@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://i1iyutq4ctea" path="res://Entities/Weapons/weapon_data.gd" id="1_iw3h1"]
 [ext_resource type="PackedScene" uid="uid://dkb3c4k60i56b" path="res://Entities/Weapons/muzzle_flash.tscn" id="1_pxgqu"]
-[ext_resource type="AudioStream" uid="uid://bsmvi5cob76xf" path="res://Assets/SFX/Guns/b_load_1.mp3" id="2_y8ua8"]
+[ext_resource type="AudioStream" uid="uid://cpo3afrgvltop" path="res://Entities/Weapons/SFX/Revolver/r_load_5.mp3" id="2_2ynjn"]
+[ext_resource type="AudioStream" uid="uid://belys7negw208" path="res://Entities/Weapons/SFX/Revolver/Reload start.mp3" id="3_t3lcx"]
+[ext_resource type="AudioStream" uid="uid://dvwsfissl6twb" path="res://Entities/Weapons/SFX/Revolver/revolver.mp3" id="4_0eygm"]
 
 [sub_resource type="Curve" id="Curve_iw3h1"]
 _data = [Vector2(0, 0.9545295), 0.0, -0.1282265, 0, 0, Vector2(0.078014195, 0.9545295), -0.075427204, -0.075427204, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -19,7 +21,9 @@ max_ammo_capacity = 6
 ammo_type = "Pistol"
 current_ammo = 6
 current_reserve_ammo = 22
-reload_sound = ExtResource("2_y8ua8")
+shoot_sound = ExtResource("4_0eygm")
+reload_start_sound = ExtResource("3_t3lcx")
+reload_sound = ExtResource("2_2ynjn")
 reload_sound_speed = 1.25
 time_per_reload_part = 0.2
 equip_anim_name = "EquipPistol"

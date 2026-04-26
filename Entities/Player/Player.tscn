@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://blmqb163okhfp" path="res://Entities/Player/crosshair.gd" id="10_jynvv"]
 [ext_resource type="Texture2D" uid="uid://cldhmereu64ky" path="res://Assets/Reticles/crosshair051.png" id="12_lmeus"]
 [ext_resource type="Script" uid="uid://67usyoo3ah6k" path="res://Entities/Player/hud.gd" id="14_uw7o4"]
+[ext_resource type="Script" uid="uid://bhqif5s7gmgge" path="res://Common/Components/HealthManager.gd" id="15_samso"]
+[ext_resource type="Script" uid="uid://b42gefpubqsn2" path="res://Common/Components/HitboxComponent.gd" id="16_hl213"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mvdsw"]
 
@@ -121,6 +123,8 @@ _data = {
 &"WeaponIdle": SubResource("Animation_uw7o4")
 }
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5m37j"]
+
 [node name="Player" type="CharacterBody3D" unique_id=222571555]
 script = ExtResource("1_2v7dq")
 allow_sprint = false
@@ -182,7 +186,7 @@ crouch_state = NodePath("../Crouch")
 
 [node name="Walk" type="Node" parent="StateMachine" unique_id=89879183 node_paths=PackedStringArray("idle_state", "walk_state", "run_state", "jump_state", "fall_state", "crouch_state")]
 script = ExtResource("4_r4xyb")
-speed = 7.5
+speed = 9.5
 accel = 0.125
 idle_state = NodePath("../Idle")
 walk_state = NodePath(".")
@@ -193,7 +197,7 @@ crouch_state = NodePath("../Crouch")
 
 [node name="Run" type="Node" parent="StateMachine" unique_id=1489990895 node_paths=PackedStringArray("idle_state", "walk_state", "run_state", "jump_state", "fall_state", "crouch_state")]
 script = ExtResource("5_c7660")
-speed = 8.0
+speed = 10.0
 friction = 0.1
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
@@ -338,3 +342,18 @@ vertical_alignment = 2
 [node name="BobAnims" type="AnimationPlayer" parent="." unique_id=1121762120]
 libraries/ = SubResource("AnimationLibrary_gallu")
 autoplay = &"WeaponIdle"
+
+[node name="HealthManager" type="Node" parent="." unique_id=61358936]
+unique_name_in_owner = true
+script = ExtResource("15_samso")
+metadata/_custom_type_script = "uid://bhqif5s7gmgge"
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=1461587361 node_paths=PackedStringArray("health_manager")]
+unique_name_in_owner = true
+script = ExtResource("16_hl213")
+health_manager = NodePath("../HealthManager")
+metadata/_custom_type_script = "uid://b42gefpubqsn2"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=1577499608]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_5m37j")

@@ -6,15 +6,22 @@
 [ext_resource type="Texture2D" uid="uid://ypnn1tli56hg" path="res://Assets/Textures/splat_3.png" id="4_b6ys6"]
 [ext_resource type="Texture2D" uid="uid://dmsnk36nmkvam" path="res://Assets/Textures/splat_4.png" id="5_ooc6w"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_b6ys6"]
+
 [node name="BloodDecalSmall" type="Node3D" unique_id=1167825252]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_yfmeh")
 textures = Array[CompressedTexture2D]([ExtResource("1_nmynm"), ExtResource("2_yfmeh"), ExtResource("4_b6ys6"), ExtResource("5_ooc6w")])
 
 [node name="Decal" type="Decal" parent="." unique_id=841235667]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.084228516, 0)
-size = Vector3(1.2, 0.2836914, 1.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12719196, 0)
+size = Vector3(1.2, 0.9501953, 1.2)
 texture_albedo = ExtResource("1_nmynm")
 modulate = Color(0.4509804, 0, 0, 0.9529412)
 upper_fade = 1e-05
+lower_fade = 1e-05
 cull_mask = 1048573
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1120879705]
+visible = false
+mesh = SubResource("PlaneMesh_b6ys6")

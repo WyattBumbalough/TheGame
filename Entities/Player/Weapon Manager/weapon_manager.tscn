@@ -275,10 +275,119 @@ _data = {
 &"ShootShotgun": SubResource("Animation_t3a6m")
 }
 
+[sub_resource type="Animation" id="Animation_it1xk"]
+resource_name = "Kick"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Leg:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25192145, 0.47442138),
+"transitions": PackedFloat32Array(2, 1, 1),
+"update": 0,
+"values": [Vector3(-0.28115955, -0.40560573, -0.794678), Vector3(-0.28115955, -0.41111147, -0.7904549), Vector3(-0.28115955, -0.556188, -0.6791773)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Leg:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25192145, 0.47442138),
+"transitions": PackedFloat32Array(2, 1, 1),
+"update": 0,
+"values": [Vector3(1.3079149, 0, 0), Vector3(1.2600936, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Leg/CSGBox3D2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.08213497, 0.33896, 0.4866804),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.5871462, 0, 0), Vector3(0.5871462, 0, 0), Vector3(-0.107843935, 0, 0), Vector3(-0.10784392, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Leg/CSGBox3D2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.083360866, 0.33283052, 0.4866804),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.2106576, -0.20842706), Vector3(0, -0.2106576, -0.20842706), Vector3(0, -0.20837224, -0.08390118), Vector3(0, -0.20837224, -0.08390118)]
+}
+
+[sub_resource type="Animation" id="Animation_pmcko"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Leg:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.28115955, -0.40560573, -0.794678)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Leg:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.3079149, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Leg/CSGBox3D2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.2106576, -0.20842706)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Leg/CSGBox3D2:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5871462, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7gci5"]
+_data = {
+&"Kick": SubResource("Animation_it1xk"),
+&"RESET": SubResource("Animation_pmcko")
+}
+
 [node name="WeaponManager" type="Node3D" unique_id=1460823030 node_paths=PackedStringArray("starting_weapons")]
 script = ExtResource("1_rakqe")
 weapon_resources = Array[ExtResource("2_xqmo2")]([ExtResource("3_55cga"), ExtResource("4_stskr")])
 starting_weapons = [NodePath("RightHand/Pistol"), NodePath("RightHand/Shotgun")]
+infinite_ammo = true
 shoot_input = "shoot"
 reload_input = "reload"
 weapon_wheel_up_input = "weapon_wheel_up"
@@ -293,7 +402,7 @@ fov = 65.0
 
 [node name="Audio" type="AudioStreamPlayer" parent="." unique_id=2098827643]
 unique_name_in_owner = true
-max_polyphony = 2
+max_polyphony = 3
 bus = &"SFX"
 
 [node name="LightFlash" type="OmniLight3D" parent="." unique_id=820310910]
@@ -401,9 +510,28 @@ visible = false
 [node name="Pipe" parent="LeftHand" unique_id=1807586010 instance=ExtResource("2_rakqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6307285, -0.2715199, -0.91802853)
 
+[node name="Leg" type="Node3D" parent="." unique_id=1697663951]
+transform = Transform3D(1, 0, 0, 0, 0.25986412, -0.9656452, 0, 0.9656452, 0.25986412, -0.28115955, -0.40560573, -0.794678)
+visible = false
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Leg" unique_id=2144458276]
+transform = Transform3D(1, 0, 0, 0, 0.5856794, -0.8105428, 0, 0.8105428, 0.5856794, 0, 0.05050859, 0.037335157)
+size = Vector3(0.18139648, 0.4326172, 0.20678711)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Leg" unique_id=595590755]
+transform = Transform3D(1, 0, 0, 0, 0.83252496, -0.5539874, 0, 0.5539874, 0.83252496, 0, -0.2106576, -0.20842706)
+size = Vector3(0.14624023, 0.4326172, 0.16381836)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Leg/CSGBox3D2" unique_id=1935390203]
+transform = Transform3D(1, 0, 0, 0, 0.9897762, 0.14262892, 0, -0.14262892, 0.9897762, 0, -0.24538422, -0.041295648)
+size = Vector3(0.18139648, 0.15527344, 0.29626465)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1863050811]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_stskr")
+
+[node name="LegAnims" type="AnimationPlayer" parent="." unique_id=127638720]
+libraries/ = SubResource("AnimationLibrary_7gci5")
 
 [node name="ShootManager" type="Node" parent="." unique_id=1373753651 node_paths=PackedStringArray("weapon_manager")]
 unique_name_in_owner = true

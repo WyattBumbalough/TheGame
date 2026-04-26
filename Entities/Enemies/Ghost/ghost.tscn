@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://ca4cj1t0048nw"]
+
+[ext_resource type="Script" uid="uid://beocxc1lkfxiy" path="res://Entities/Enemies/EnemyBase.gd" id="1_0etef"]
+[ext_resource type="Resource" uid="uid://ddovssel0kikx" path="res://Entities/Enemies/Ghost/e_ghost_data.tres" id="2_hcida"]
+[ext_resource type="Script" uid="uid://bhqif5s7gmgge" path="res://Common/Components/HealthManager.gd" id="3_hil1s"]
+[ext_resource type="Script" uid="uid://c0qum5r64hh0" path="res://Common/Components/MovementComponent.gd" id="6_hil1s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_taegf"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_khbf5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0etef"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.18039216)
+
+[node name="Ghost" type="CharacterBody3D" unique_id=647086594 node_paths=PackedStringArray("nav_agent", "movement_component", "health_component", "sight_raycast")]
+script = ExtResource("1_0etef")
+enemy_data = ExtResource("2_hcida")
+max_detection_range = 20.0
+nav_agent = NodePath("NavigationAgent3D")
+movement_component = NodePath("MovementComponent")
+health_component = NodePath("HealthComponent")
+sight_raycast = NodePath("RayCast3D")
+
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=420682477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_taegf")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1489480607]
+
+[node name="Visuals" type="Node3D" parent="." unique_id=2047277738]
+
+[node name="Body" type="MeshInstance3D" parent="Visuals" unique_id=919564658]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_khbf5")
+surface_material_override/0 = SubResource("StandardMaterial3D_0etef")
+
+[node name="Head" type="Node3D" parent="." unique_id=134606056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1697585877]
+script = ExtResource("3_hil1s")
+metadata/_custom_type_script = "uid://bhqif5s7gmgge"
+
+[node name="MovementComponent" type="Node" parent="." unique_id=1764841330 node_paths=PackedStringArray("body", "nav_agent")]
+script = ExtResource("6_hil1s")
+body = NodePath("..")
+nav_agent = NodePath("../NavigationAgent3D")
+metadata/_custom_type_script = "uid://c0qum5r64hh0"
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1482213533]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+enabled = false
+target_position = Vector3(0, 0, -1)
