@@ -30,6 +30,10 @@ folder_colors={
 "res://Assets/": "teal"
 }
 
+[global_group]
+
+Player=""
+
 [input]
 
 up={

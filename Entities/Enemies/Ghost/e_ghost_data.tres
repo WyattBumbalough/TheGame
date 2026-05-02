@@ -5,5 +5,7 @@
 [resource]
 script = ExtResource("1_m53k5")
 enemy_name = "Ghost"
-attack_range = 15.0
+detection_range = 50.0
+attack_range = 1.5
+attack_startup_time = 0.15
 metadata/_custom_type_script = "uid://c12iah1jacbwu"

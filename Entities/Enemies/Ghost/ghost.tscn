@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ca4cj1t0048nw"]
 
-[ext_resource type="Script" uid="uid://ds76syh35fr5q" path="res://Entities/Enemies/Ghost/enemy_ghost.gd" id="1_gqgrj"]
+[ext_resource type="Script" uid="uid://ds76syh35fr5q" path="res://Entities/Enemies/EnemyMeleeClass.gd" id="1_gqgrj"]
 [ext_resource type="Resource" uid="uid://ddovssel0kikx" path="res://Entities/Enemies/Ghost/e_ghost_data.tres" id="2_hcida"]
 [ext_resource type="Script" uid="uid://bhqif5s7gmgge" path="res://Common/Components/HealthManager.gd" id="3_hil1s"]
 [ext_resource type="Script" uid="uid://b42gefpubqsn2" path="res://Common/Components/HitboxComponent.gd" id="5_hcida"]
@@ -29,9 +29,10 @@ emission_energy_multiplier = 3.23
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hil1s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wqf88"]
-radius = 1.0
+radius = 1.299998
+height = 2.599996
 
-[node name="Ghost" type="CharacterBody3D" unique_id=1262409958 node_paths=PackedStringArray("hurtbox", "nav_agent", "movement_component", "health_component", "hitbox_component", "sight_raycast")]
+[node name="Ghost" type="CharacterBody3D" unique_id=1262409958 node_paths=PackedStringArray("hurtbox", "nav_agent", "movement_component", "health_component", "hitbox_component")]
 collision_layer = 2
 script = ExtResource("1_gqgrj")
 hurtbox = NodePath("Hurtbox")
@@ -40,7 +41,6 @@ nav_agent = NodePath("NavigationAgent3D")
 movement_component = NodePath("MovementComponent")
 health_component = NodePath("HealthComponent")
 hitbox_component = NodePath("Hitbox")
-sight_raycast = NodePath("Sightline")
 
 [node name="Collider" type="CollisionShape3D" parent="." unique_id=420682477]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -96,11 +96,10 @@ shape = SubResource("CapsuleShape3D_hil1s")
 debug_color = Color(0.70196074, 0.118455864, 0, 0.41960785)
 
 [node name="Hurtbox" type="Area3D" parent="." unique_id=1941291093]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2845911)
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" unique_id=1206529553]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.220998, -0.9994629)
 shape = SubResource("CapsuleShape3D_wqf88")
 debug_color = Color(0.70196074, 0.07897059, 0, 0.41960785)
 
