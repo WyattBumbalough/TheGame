@@ -6,14 +6,12 @@ class_name Hitbox
 @export var critical: bool = false
 
 
-func take_damage(amount: float):
+func take_damage(amount: float, pos: = Vector3.ZERO, normal:= Vector3.ZERO):
 	if !health_manager:
 		printerr("Health manager has not been configured.")
 		return
 	if health_manager.current_health <= 0.0:
 		return
 	
-	health_manager.take_damage(amount)
-	
-	
+	health_manager.take_damage(amount, pos, normal)
 	

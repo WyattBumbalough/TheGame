@@ -31,7 +31,7 @@ func die():
 	queue_free()
 
 
-func spawn_blood(_arg):
+func spawn_blood(_arg, _pos, _nor):
 	var player_pos = Refs.PLAYER.global_position
 	rays.look_at(Vector3(player_pos.x, rays.global_position.y, player_pos.z))
 	
@@ -43,7 +43,7 @@ func spawn_blood(_arg):
 	if ray_front.is_colliding():
 		var col_point = ray_front.get_collision_point()
 		var col_normal = ray_front.get_collision_normal()
-		print(ray_front.get_collider)
+		
 		inst.global_position = col_point
 		inst.look_at(inst.global_transform.origin + col_normal)
 		inst.rotate_object_local(Vector3.RIGHT, -PI/2)

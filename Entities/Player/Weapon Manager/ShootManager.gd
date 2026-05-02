@@ -66,13 +66,13 @@ func hitscan():
 		var final_damage: float
 		
 		if collider is Hitbox:
-			weapon_manager.spawn_bloodhit_effect(collider_point, collider_normal)
+			#weapon_manager.spawn_bloodhit_effect(collider_point, collider_normal)
 			if collider.critical:
 				Refs.PLAYER.crosshair.tween_hitmarker()
 				final_damage = cw.weapon_damage * cw.headshot_damage_multiplier
-				collider.take_damage(final_damage)
+				collider.take_damage(final_damage, collider_point, collider_normal)
 			else:
 				final_damage = cw.weapon_damage
-				collider.take_damage(final_damage)
+				collider.take_damage(final_damage, collider_point, collider_normal)
 		else:
 			weapon_manager.spawn_bullethole_decal(collider_point, collider_normal)

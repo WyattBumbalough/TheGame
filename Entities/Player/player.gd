@@ -93,6 +93,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+
 func _physics_process(delta: float) -> void:
 	state_machine.handle_physics(delta)
 	
@@ -110,6 +111,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 	
 	%Label.text = state_machine.current_state.name
+	%HealthBar.value = health_manager.current_health
 
 	move_and_slide()
 
