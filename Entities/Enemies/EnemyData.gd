@@ -3,6 +3,7 @@ class_name EnemyData extends Resource
 @export_group("Basic settings")
 @export var enemy_name: String = ""
 @export var detection_range: float = 15.0
+@export var detection_time: float = 1.0
 @export var hitspark: PackedScene
 
 @export_group("Navigation settings")

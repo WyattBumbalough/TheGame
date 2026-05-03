@@ -32,10 +32,16 @@ func _setup():
 	# Connect signals.
 	health_component.damage_taken.connect(_on_damage_taken)
 	health_component.no_health.connect(_on_killed)
+	
+	movement_component.speed = enemy_data.movement_speed
 	movement_component.on_navigation_started.connect(_on_navigation_started)
+	
+	if visuals:
+		visuals.anim_finished.connect(_on_visual_anim_finished)
 	
 	if enemy_data.idle_anim_name != "":
 		visuals.play_animation(enemy_data.idle_anim_name, enemy_data.idle_anim_speed)
+
 
 func _physics_process(delta: float) -> void:
 	if time >= check_sight_delay:
@@ -49,7 +55,7 @@ func _physics_process(delta: float) -> void:
 		distance_to_player = self.global_position.distance_to(_player.global_position)
 	
 	if player_detected:
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(enemy_data.detection_time).timeout
 		movement_component.navigate_to(_player.global_position, delta)
 
 
@@ -110,3 +116,7 @@ func _on_navigation_ended():
 
 func _on_killed():
 	pass
+
+
+func _on_visual_anim_finished(_anim_name: String):
+	print("%s animation finished." % _anim_name)
