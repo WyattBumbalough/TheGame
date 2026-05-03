@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://c5o4ueqmo6wt"]
+
+[ext_resource type="Script" uid="uid://c5ihsrd4hkw43" path="res://Entities/Enemies/EnemyRangedClass.gd" id="1_tj64a"]
+[ext_resource type="PackedScene" uid="uid://caem00x58n8ih" path="res://Entities/Weapons/Decals/bloodhit.tscn" id="2_3t4ei"]
+[ext_resource type="Script" uid="uid://c12iah1jacbwu" path="res://Entities/Enemies/EnemyData.gd" id="3_auxmi"]
+[ext_resource type="PackedScene" uid="uid://b14oy8tv3v5b0" path="res://Entities/Enemies/Grunt/grunt_visuals.tscn" id="4_auxmi"]
+[ext_resource type="Script" uid="uid://bhqif5s7gmgge" path="res://Common/Components/HealthManager.gd" id="5_chp6x"]
+[ext_resource type="Script" uid="uid://b42gefpubqsn2" path="res://Common/Components/HitboxComponent.gd" id="6_l3s8a"]
+[ext_resource type="Script" uid="uid://c0qum5r64hh0" path="res://Common/Components/MovementComponent.gd" id="7_l3s8a"]
+
+[sub_resource type="Resource" id="Resource_73oyq"]
+script = ExtResource("3_auxmi")
+enemy_name = "Grunt"
+detection_range = 30.0
+hitspark = ExtResource("2_3t4ei")
+attack_damage = 45.0
+attack_range = 30.0
+idle_anim_name = "idle1"
+move_anim_name = "running"
+move_anim_speed = 0.75
+aim_anim_name = "aim"
+aim_anim_speed = 1.15
+metadata/_custom_type_script = "uid://c12iah1jacbwu"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_73oyq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ku0in"]
+radius = 0.41455078
+height = 1.8330078
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_chp6x"]
+radius = 0.194
+
+[node name="Grunt" type="CharacterBody3D" unique_id=814728106 node_paths=PackedStringArray("visuals", "nav_agent", "movement_component", "health_component")]
+script = ExtResource("1_tj64a")
+enemy_data = SubResource("Resource_73oyq")
+visuals = NodePath("GruntVisuals")
+nav_agent = NodePath("NavigationAgent3D")
+movement_component = NodePath("MovementComponent")
+health_component = NodePath("HealthManager")
+
+[node name="GruntVisuals" parent="." unique_id=1107347924 instance=ExtResource("4_auxmi")]
+
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=234547176]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+shape = SubResource("CapsuleShape3D_73oyq")
+debug_color = Color(0, 0.6, 0.69803923, 0.18431373)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=228209217]
+
+[node name="HealthManager" type="Node" parent="." unique_id=174401756]
+script = ExtResource("5_chp6x")
+metadata/_custom_type_script = "uid://bhqif5s7gmgge"
+
+[node name="BodyHitbox" type="Area3D" parent="." unique_id=1052968469 node_paths=PackedStringArray("health_manager")]
+script = ExtResource("6_l3s8a")
+health_manager = NodePath("../HealthManager")
+metadata/_custom_type_script = "uid://b42gefpubqsn2"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHitbox" unique_id=1874448296]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9165039, 0)
+shape = SubResource("CapsuleShape3D_ku0in")
+debug_color = Color(0.27200973, 0.70196074, 0, 0.41960785)
+
+[node name="HeadHitbox" type="Area3D" parent="." unique_id=1524801344 node_paths=PackedStringArray("health_manager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9513396, 0)
+script = ExtResource("6_l3s8a")
+health_manager = NodePath("../HealthManager")
+critical = true
+metadata/_custom_type_script = "uid://b42gefpubqsn2"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HeadHitbox" unique_id=188973837]
+shape = SubResource("SphereShape3D_chp6x")
+debug_color = Color(0.70196074, 0, 0, 0.41960785)
+
+[node name="MovementComponent" type="Node" parent="." unique_id=760896886 node_paths=PackedStringArray("body", "nav_agent")]
+script = ExtResource("7_l3s8a")
+body = NodePath("..")
+nav_agent = NodePath("../NavigationAgent3D")
+metadata/_custom_type_script = "uid://c0qum5r64hh0"

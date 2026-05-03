@@ -17,6 +17,19 @@ class_name EnemyData extends Resource
 @export var attack_recovery_time: float = 0.15
 @export var attack_projectile: PackedScene
 
+@export_group("Animation Settings")
+@export var idle_anim_name: String = ""
+@export var idle_anim_speed: float = 1.0
+@export var move_anim_name: String = ""
+@export var move_anim_speed: float = 1.0
+@export var aim_anim_name: String = ""
+@export var aim_anim_speed: float = 1.0
+@export var attack_anim_name: String = ""
+@export var attack_anim_speed: float = 1.0
+@export var death_anim_name: String = ""
+@export var death_anim_speed: float = 1.0
+
+
 @export_group("Sounds")
 @export var detection_sound: AudioStream
 @export var attack_sound: AudioStream

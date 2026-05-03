@@ -22,8 +22,9 @@ func _attack():
 	
 	if hurtbox.get_overlapping_bodies().has(_player):
 		_player.hitbox.take_damage(enemy_data.attack_damage)
-		# For now this will only apply to the ghost enemy.
-		hitbox_component.take_damage(enemy_data.attack_damage) 
+	
+	# For now this will only apply to the ghost enemy.
+	hitbox_component.take_damage(enemy_data.attack_damage) 
 
 
 func _on_damage_taken(_amount: float, _position: Vector3, _normal: Vector3):
