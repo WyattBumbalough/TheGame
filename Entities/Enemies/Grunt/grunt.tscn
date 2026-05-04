@@ -13,6 +13,7 @@ script = ExtResource("3_auxmi")
 enemy_name = "Grunt"
 detection_range = 30.0
 hitspark = ExtResource("2_3t4ei")
+movement_speed = 3.5
 attack_damage = 45.0
 attack_range = 30.0
 idle_anim_name = "idle1"

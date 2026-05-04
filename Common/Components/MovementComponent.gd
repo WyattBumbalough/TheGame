@@ -12,17 +12,28 @@ signal on_navigation_stopped
 var direction: Vector3 = Vector3.ZERO
 var time: float = 0.0
 
-var can_move: bool = true
+var can_move: bool = false
 var is_moving: bool = false
 
 func update(_delta: float) -> void:
-	if !body:
-		printerr("No character body assigned to this movement component.")
-		return
-	
-	body.velocity.x = direction.x * speed
-	body.velocity.z = direction.z * speed
-	body.move_and_slide()
+	if can_move:
+		direction = body.global_position.direction_to(nav_agent.get_next_path_position())
+		
+		if !is_moving:
+			is_moving = true
+			on_navigation_started.emit()
+		
+		# Stuff to smoothly rotate the model towards a direction.
+		var rot_speed = 4.0
+		var target_rot = direction.signed_angle_to(Vector3.MODEL_REAR, Vector3.DOWN)
+		if abs(target_rot - body.rotation.y) > deg_to_rad(60):
+			rot_speed = 20
+		body.rotation.y = lerp_angle(body.rotation.y, target_rot, rot_speed * _delta)
+		
+		#body.look_at(nav_agent.target_position)
+		body.velocity.x = direction.x * speed
+		body.velocity.z = direction.z * speed
+		body.move_and_slide()
 
 
 func navigate_to(_position: Vector3, _delta: float, _delay: float = 0.1):
@@ -48,6 +59,14 @@ func navigate_to(_position: Vector3, _delta: float, _delay: float = 0.1):
 	body.velocity.z = direction.z * speed
 	
 	body.move_and_slide()
+
+
+func set_nav_target(pos: Vector3):
+	nav_agent.target_position = pos
+
+
+func start_navigation():
+	can_move = true
 
 
 func stop_navigation():

@@ -50,7 +50,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.191356, 0, -1.1739483)
 transform = Transform3D(0.6256784, 0, 0.78008103, 0, 1, 0, -0.78008103, 0, 0.6256784, 3.578385, 0, -11.707236)
 
 [node name="Ghost" parent="." unique_id=647086594 instance=ExtResource("5_fhsqr")]
-transform = Transform3D(0.2513261, 0, 0.9679025, 0, 1, 0, -0.9679025, 0, 0.2513261, -0.23949814, 0, -28.084593)
+transform = Transform3D(0.2513261, 0, 0.9679025, 0, 1, 0, -0.9679025, 0, 0.2513261, -0.23949814, 0, -21.878748)
 
 [node name="Floor2" type="CSGBox3D" parent="." unique_id=620668400]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -14.151013)

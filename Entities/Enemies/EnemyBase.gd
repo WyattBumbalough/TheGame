@@ -10,7 +10,7 @@ extends CharacterBody3D
 @export var health_component: HealthManager
 @export var hitbox_component: Hitbox
 
-@onready var breadcrumb = preload("res://Common/Components/Breadcrumb/breadcrumb.tscn")
+@onready var bc = preload("res://Common/Components/Breadcrumb/breadcrumb.tscn")
 
 var can_move: bool = true
 var is_moving: bool = false
@@ -47,20 +47,38 @@ func _setup():
 
 
 func _physics_process(delta: float) -> void:
-	if time >= check_sight_delay:
-		if _has_sight_to_player():
-			_on_player_detected()
-		time = 0.0
-	else:
-		time += delta
+	#if time >= check_sight_delay:
+		#if _has_sight_to_player():
+			#_on_player_detected()
+		#time = 0.0
+	#else:
+		#time += delta
+	if distance_to_player <= enemy_data.detection_range:
+		_look_for_breadcrumbs(delta)
 	
 	if _player:
 		distance_to_player = self.global_position.distance_to(_player.global_position)
 	
-	if player_detected:
-		await get_tree().create_timer(enemy_data.detection_time).timeout
-		movement_component.navigate_to(_player.global_position, delta)
+	movement_component.update(delta)
+	#if player_detected:
+		##await get_tree().create_timer(enemy_data.detection_time).timeout
+		#movement_component.update(delta)
 
+func _look_for_breadcrumbs(delta: float):
+	if time >= 0.3:
+		if _has_sight_to_player():
+			var breadcrumb: Vector3 = _player.global_position
+			movement_component.set_nav_target(breadcrumb)
+			movement_component.start_navigation()
+			
+			# Debug breadcrumbs
+			var i = bc.instantiate()
+			get_tree().get_root().add_child(i)
+			i.global_position = breadcrumb
+			
+		time = 0.0
+	else:
+		time += delta
 
 func _has_sight_to_player() -> bool:
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
