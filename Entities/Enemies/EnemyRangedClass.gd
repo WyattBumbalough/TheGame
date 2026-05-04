@@ -1,14 +1,13 @@
 class_name  EnemyRangedClass
 extends EnemyBaseClass
 
+@export var min_chase_time: float
+@export var max_chase_time: float
 
 func _physics_process(delta: float) -> void:
 	super(delta)
 	
-
-func _on_player_detected():
-	player_detected = true
-	can_move = true
+	
 
 
 func _aim():
@@ -23,6 +22,15 @@ func _attack():
 	visuals.play_animation(enemy_data.attack_anim_name)
 
 
+func _on_navigation_started():
+	super()
+
+
 func _on_visual_anim_finished(_anim_name: String):
 	if _anim_name == enemy_data.aim_anim_name:
 		_attack()
+
+
+func _on_player_detected():
+	player_detected = true
+	can_move = true

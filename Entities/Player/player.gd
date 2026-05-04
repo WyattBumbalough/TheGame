@@ -97,6 +97,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	state_machine.handle_physics(delta)
 	
+	# If movement is allowed, set the input direction.
 	if allow_move:
 		if Input.get_vector(MOVE_LEFT, MOVE_RIGHT, MOVE_FORWARD, MOVE_BACK):
 			input_direction = Input.get_vector(MOVE_LEFT, MOVE_RIGHT, MOVE_FORWARD, MOVE_BACK)

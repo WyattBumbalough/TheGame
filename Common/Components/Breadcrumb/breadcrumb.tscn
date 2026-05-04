@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dl4i78487nj8t"]
+
+[ext_resource type="Script" uid="uid://dun6c7sipys56" path="res://Common/Components/Breadcrumb/breadcrumb.gd" id="1_yt5q8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yt5q8"]
+albedo_color = Color(0.265625, 1, 0.8072267, 1)
+emission_enabled = true
+emission = Color(0.265625, 1, 0.8072267, 1)
+emission_energy_multiplier = 2.51
+
+[sub_resource type="SphereMesh" id="SphereMesh_5sag7"]
+material = SubResource("StandardMaterial3D_yt5q8")
+
+[node name="Breadcrumb" type="Node3D" unique_id=1870368985]
+script = ExtResource("1_yt5q8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1786318959]
+transform = Transform3D(0.38, 0, 0, 0, 0.38, 0, 0, 0, 0.38, 0, 0.14242291, 0)
+mesh = SubResource("SphereMesh_5sag7")
+
+[node name="Timer" type="Timer" parent="." unique_id=329627077]
+wait_time = 10.0
+autostart = true

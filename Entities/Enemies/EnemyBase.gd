@@ -10,6 +10,8 @@ extends CharacterBody3D
 @export var health_component: HealthManager
 @export var hitbox_component: Hitbox
 
+@onready var breadcrumb = preload("res://Common/Components/Breadcrumb/breadcrumb.tscn")
+
 var can_move: bool = true
 var is_moving: bool = false
 
@@ -28,6 +30,7 @@ func _ready() -> void:
 func _setup():
 	await get_tree().process_frame
 	_player = Refs.PLAYER
+	distance_to_player = global_position.distance_to(_player.global_position)
 	
 	# Connect signals.
 	health_component.damage_taken.connect(_on_damage_taken)
@@ -93,7 +96,7 @@ func _attack():
 
 func _on_player_detected():
 	player_detected = true
-	can_move = true
+	
 
 
 func _on_damage_taken(_amount: float, _position: Vector3, _normal: Vector3):

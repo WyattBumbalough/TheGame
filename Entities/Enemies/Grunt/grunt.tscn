@@ -31,8 +31,13 @@ height = 1.8330078
 [sub_resource type="SphereShape3D" id="SphereShape3D_chp6x"]
 radius = 0.194
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_l3s8a"]
+radius = 20.0
+
 [node name="Grunt" type="CharacterBody3D" unique_id=814728106 node_paths=PackedStringArray("visuals", "nav_agent", "movement_component", "health_component")]
 script = ExtResource("1_tj64a")
+min_chase_time = 1.0
+max_chase_time = 4.0
 enemy_data = SubResource("Resource_73oyq")
 visuals = NodePath("GruntVisuals")
 nav_agent = NodePath("NavigationAgent3D")
@@ -79,3 +84,9 @@ script = ExtResource("7_l3s8a")
 body = NodePath("..")
 nav_agent = NodePath("../NavigationAgent3D")
 metadata/_custom_type_script = "uid://c0qum5r64hh0"
+
+[node name="DetectionArea" type="Area3D" parent="." unique_id=610662873]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=1530377553]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+shape = SubResource("CylinderShape3D_l3s8a")

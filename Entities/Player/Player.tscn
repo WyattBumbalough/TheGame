@@ -150,6 +150,7 @@ _data = {
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5m37j"]
 
 [node name="Player" type="CharacterBody3D" unique_id=222571555 groups=["Player"]]
+collision_layer = 5
 script = ExtResource("1_2v7dq")
 allow_sprint = false
 
