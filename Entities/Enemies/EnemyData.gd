@@ -34,5 +34,6 @@ class_name EnemyData extends Resource
 @export_group("Sounds")
 @export var detection_sound: AudioStream
 @export var attack_sound: AudioStream
+@export var aim_sound: AudioStream
 @export var damaged_sound: AudioStream
 @export var killed_sound: AudioStream

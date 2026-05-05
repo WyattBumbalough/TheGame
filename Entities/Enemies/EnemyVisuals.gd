@@ -16,7 +16,7 @@ func play_animation(anim_name: String, speed: float = 1.0, blend_time: float = -
 	if anims.has_animation(anim_name):
 		anims.play(anim_name, blend_time, speed)
 	else:
-		printerr("Animation %s not found." %anim_name)
+		printerr("Animation %s not found." % anim_name)
 
 
 func _on_anim_finished(_name: String):

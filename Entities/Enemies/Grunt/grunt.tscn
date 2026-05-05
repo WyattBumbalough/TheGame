@@ -2,11 +2,15 @@
 
 [ext_resource type="Script" uid="uid://c5ihsrd4hkw43" path="res://Entities/Enemies/EnemyRangedClass.gd" id="1_tj64a"]
 [ext_resource type="PackedScene" uid="uid://caem00x58n8ih" path="res://Entities/Weapons/Decals/bloodhit.tscn" id="2_3t4ei"]
+[ext_resource type="AudioStream" uid="uid://c0sfly6reoxia" path="res://Assets/SFX/Guns/h_cock.mp3" id="2_23dg2"]
+[ext_resource type="AudioStream" uid="uid://dvwsfissl6twb" path="res://Entities/Weapons/SFX/Revolver/revolver.mp3" id="3_0clk0"]
 [ext_resource type="Script" uid="uid://c12iah1jacbwu" path="res://Entities/Enemies/EnemyData.gd" id="3_auxmi"]
 [ext_resource type="PackedScene" uid="uid://b14oy8tv3v5b0" path="res://Entities/Enemies/Grunt/grunt_visuals.tscn" id="4_auxmi"]
 [ext_resource type="Script" uid="uid://bhqif5s7gmgge" path="res://Common/Components/HealthManager.gd" id="5_chp6x"]
 [ext_resource type="Script" uid="uid://b42gefpubqsn2" path="res://Common/Components/HitboxComponent.gd" id="6_l3s8a"]
 [ext_resource type="Script" uid="uid://c0qum5r64hh0" path="res://Common/Components/MovementComponent.gd" id="7_l3s8a"]
+[ext_resource type="Script" uid="uid://bt60iribavow8" path="res://Entities/Enemies/Grunt/projectile_spawner.gd" id="10_0clk0"]
+[ext_resource type="PackedScene" uid="uid://c0q4tjw4snrbh" path="res://Common/Components/Projectile/projectile_scene.tscn" id="11_j6rcx"]
 
 [sub_resource type="Resource" id="Resource_73oyq"]
 script = ExtResource("3_auxmi")
@@ -16,11 +20,16 @@ hitspark = ExtResource("2_3t4ei")
 movement_speed = 3.5
 attack_damage = 45.0
 attack_range = 30.0
+attack_startup_time = 0.15
+attack_recovery_time = 0.25
 idle_anim_name = "idle1"
 move_anim_name = "running"
 move_anim_speed = 0.75
 aim_anim_name = "aim"
 aim_anim_speed = 1.15
+attack_anim_name = "shoot"
+attack_sound = ExtResource("3_0clk0")
+aim_sound = ExtResource("2_23dg2")
 metadata/_custom_type_script = "uid://c12iah1jacbwu"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_73oyq"]
@@ -35,15 +44,18 @@ radius = 0.194
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_l3s8a"]
 radius = 20.0
 
-[node name="Grunt" type="CharacterBody3D" unique_id=814728106 node_paths=PackedStringArray("visuals", "nav_agent", "movement_component", "health_component")]
+[node name="Grunt" type="CharacterBody3D" unique_id=814728106 node_paths=PackedStringArray("chase_timer", "projectile_spawner", "visuals", "nav_agent", "movement_component", "health_component")]
 script = ExtResource("1_tj64a")
 min_chase_time = 1.0
-max_chase_time = 4.0
+max_chase_time = 2.5
+chase_timer = NodePath("ChaseTimer")
+projectile_spawner = NodePath("ProjectileSpawner")
 enemy_data = SubResource("Resource_73oyq")
 visuals = NodePath("GruntVisuals")
 nav_agent = NodePath("NavigationAgent3D")
 movement_component = NodePath("MovementComponent")
 health_component = NodePath("HealthManager")
+debug_breadcrumbs = true
 
 [node name="GruntVisuals" parent="." unique_id=1107347924 instance=ExtResource("4_auxmi")]
 
@@ -91,3 +103,13 @@ metadata/_custom_type_script = "uid://c0qum5r64hh0"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=1530377553]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 shape = SubResource("CylinderShape3D_l3s8a")
+
+[node name="ChaseTimer" type="Timer" parent="." unique_id=1006644516]
+one_shot = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1615223948]
+
+[node name="ProjectileSpawner" type="Marker3D" parent="." unique_id=744129228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6329924, -1.5332818)
+script = ExtResource("10_0clk0")
+_projectile = ExtResource("11_j6rcx")

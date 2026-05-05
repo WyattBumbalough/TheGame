@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://cwjomq7poa3ul" path="res://Entities/Player/Player.tscn" id="2_um2ej"]
 [ext_resource type="Texture2D" uid="uid://d4gn853xgitht" path="res://Assets/Textures/grids/light/texture_08.png" id="3_e4u3s"]
 [ext_resource type="PackedScene" uid="uid://p02o66j1sv5w" path="res://Entities/Enemies/Test Enemy/test_enemy.tscn" id="4_e4u3s"]
-[ext_resource type="PackedScene" uid="uid://ca4cj1t0048nw" path="res://Entities/Enemies/Ghost/ghost.tscn" id="5_fhsqr"]
 [ext_resource type="PackedScene" uid="uid://c5o4ueqmo6wt" path="res://Entities/Enemies/Grunt/grunt.tscn" id="6_g8jyc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mfbug"]
@@ -44,16 +43,13 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=222571555 instance=ExtResource("2_um2ej")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.191356, 0, -1.1739483)
+transform = Transform3D(0.75195485, 0, -0.65921456, 0, 1, 0, 0.65921456, 0, 0.75195485, -14.290324, 0, 3.9937534)
 
 [node name="TestEnemy" parent="." unique_id=1687142084 instance=ExtResource("4_e4u3s")]
 transform = Transform3D(0.6256784, 0, 0.78008103, 0, 1, 0, -0.78008103, 0, 0.6256784, 3.578385, 0, -11.707236)
 
-[node name="Ghost" parent="." unique_id=647086594 instance=ExtResource("5_fhsqr")]
-transform = Transform3D(0.2513261, 0, 0.9679025, 0, 1, 0, -0.9679025, 0, 0.2513261, -0.23949814, 0, -21.878748)
-
 [node name="Floor2" type="CSGBox3D" parent="." unique_id=620668400]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -14.151013)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7269897, -14.151013)
 use_collision = true
 size = Vector3(142.25, 0.5, 78.25)
 material = SubResource("StandardMaterial3D_e4u3s")
@@ -151,18 +147,20 @@ material = SubResource("StandardMaterial3D_fhsqr")
 [node name="Lights" type="Node3D" parent="." unique_id=980842921]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights" unique_id=674037594]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2082617, 2.25, 1.5741873)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0705192, 1.950305, 1.5741873)
 light_color = Color(1, 0.8650586, 0.559375, 1)
-light_energy = 0.674
+light_energy = 0.791
 shadow_enabled = true
-omni_range = 13.783
+omni_range = 38.34
+omni_attenuation = 0.305
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Lights" unique_id=278517670]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.336688, 2.25, -5.6995974)
 light_color = Color(1, 0.8650586, 0.559375, 1)
 light_energy = 0.674
 shadow_enabled = true
-omni_range = 12.807
+omni_range = 75.882
+omni_attenuation = 0.3
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Lights" unique_id=462582596]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9597617, 1.9007368, -11.417492)

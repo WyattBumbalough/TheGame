@@ -154,3 +154,7 @@ func tween_cam_fov_down():
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.tween_property(camera, "fov", base_fov, 0.75)
 	
+
+
+func _on_health_manager_damage_taken(amount: Variant, pos: Variant, nor: Variant) -> void:
+	$CanvasLayer/Control/DamageAnim.play("damage")

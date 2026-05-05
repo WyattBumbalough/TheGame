@@ -67,6 +67,8 @@ func set_nav_target(pos: Vector3):
 
 func start_navigation():
 	can_move = true
+	#is_moving = true
+	
 
 
 func stop_navigation():

@@ -10,6 +10,9 @@ extends CharacterBody3D
 @export var health_component: HealthManager
 @export var hitbox_component: Hitbox
 
+
+@export_group("Debug")
+@export var debug_breadcrumbs: bool = false
 @onready var bc = preload("res://Common/Components/Breadcrumb/breadcrumb.tscn")
 
 var can_move: bool = true
@@ -19,6 +22,7 @@ var time: float = 0.0
 
 var _player: Player 
 var player_detected: bool = false
+var can_scan_for_player: bool = true
 var distance_to_player: float
 
 var check_sight_delay: float = 0.75
@@ -47,38 +51,33 @@ func _setup():
 
 
 func _physics_process(delta: float) -> void:
-	#if time >= check_sight_delay:
-		#if _has_sight_to_player():
-			#_on_player_detected()
-		#time = 0.0
-	#else:
-		#time += delta
-	if distance_to_player <= enemy_data.detection_range:
+	if distance_to_player <= enemy_data.detection_range and can_scan_for_player:
 		_look_for_breadcrumbs(delta)
 	
 	if _player:
 		distance_to_player = self.global_position.distance_to(_player.global_position)
 	
 	movement_component.update(delta)
-	#if player_detected:
-		##await get_tree().create_timer(enemy_data.detection_time).timeout
-		#movement_component.update(delta)
+
 
 func _look_for_breadcrumbs(delta: float):
 	if time >= 0.3:
 		if _has_sight_to_player():
+			_on_player_detected()
+			
 			var breadcrumb: Vector3 = _player.global_position
 			movement_component.set_nav_target(breadcrumb)
 			movement_component.start_navigation()
 			
-			# Debug breadcrumbs
-			var i = bc.instantiate()
-			get_tree().get_root().add_child(i)
-			i.global_position = breadcrumb
+			if debug_breadcrumbs:
+				var i = bc.instantiate()
+				get_tree().get_root().add_child(i)
+				i.global_position = breadcrumb
 			
 		time = 0.0
 	else:
 		time += delta
+
 
 func _has_sight_to_player() -> bool:
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
@@ -112,9 +111,10 @@ func _attack():
 	pass
 
 
+#region Signal Methods
+
 func _on_player_detected():
 	player_detected = true
-	
 
 
 func _on_damage_taken(_amount: float, _position: Vector3, _normal: Vector3):
@@ -141,3 +141,5 @@ func _on_killed():
 
 func _on_visual_anim_finished(_anim_name: String):
 	print("%s animation finished." % _anim_name)
+
+#endregion
