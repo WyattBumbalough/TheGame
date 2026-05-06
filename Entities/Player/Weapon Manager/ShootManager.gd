@@ -64,7 +64,7 @@ func hitscan():
 		var collider_point: Vector3 = result.get("position")
 		var collider_normal: Vector3 = result.get("normal")
 		var final_damage: float
-		
+
 		if collider is Hitbox:
 			#weapon_manager.spawn_bloodhit_effect(collider_point, collider_normal)
 			if collider.critical:

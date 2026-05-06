@@ -19,5 +19,8 @@ func play_animation(anim_name: String, speed: float = 1.0, blend_time: float = -
 		printerr("Animation %s not found." % anim_name)
 
 
+func stop_animation():
+	anims.stop()
+
 func _on_anim_finished(_name: String):
 	anim_finished.emit(_name)

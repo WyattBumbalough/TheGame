@@ -156,5 +156,5 @@ func tween_cam_fov_down():
 	
 
 
-func _on_health_manager_damage_taken(amount: Variant, pos: Variant, nor: Variant) -> void:
+func _on_health_manager_damage_taken(_amount: Variant, _pos: Variant, _nor: Variant) -> void:
 	$CanvasLayer/Control/DamageAnim.play("damage")

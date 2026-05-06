@@ -13,7 +13,9 @@ extends CharacterBody3D
 
 @export_group("Debug")
 @export var debug_breadcrumbs: bool = false
+
 @onready var bc = preload("res://Common/Components/Breadcrumb/breadcrumb.tscn")
+@onready var gibs = preload("res://Entities/Effects/giblets.tscn")
 
 var can_move: bool = true
 var is_moving: bool = false
@@ -97,6 +99,12 @@ func _has_sight_to_player() -> bool:
 		return false
 
 
+func _spawn_gibs(_pos: Vector3):
+	var i = gibs.instantiate()
+	get_tree().get_root().add_child(i)
+	i.global_position = _pos
+
+
 func _spawn_hitspark(pos: Vector3, nor: Vector3):
 	if enemy_data.hitspark != null:
 		var instance = enemy_data.hitspark.instantiate()
@@ -118,7 +126,7 @@ func _on_player_detected():
 
 
 func _on_damage_taken(_amount: float, _position: Vector3, _normal: Vector3):
-	pass
+	if enemy_data.hitspark: _spawn_hitspark(_position, _normal)
 
 
 func _on_navigation_started():

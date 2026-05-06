@@ -14,6 +14,7 @@ class_name EnemyData extends Resource
 @export_group("Attack Settings")
 @export var attack_damage: float = 10.0
 @export var attack_range: float = 5.0
+@export var max_number_of_attacks: int = 1
 @export var attack_startup_time: float = 0.5
 @export var attack_recovery_time: float = 0.15
 @export var attack_projectile: PackedScene

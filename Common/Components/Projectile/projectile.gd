@@ -14,7 +14,6 @@ func _physics_process(delta: float) -> void:
 	var _normal = get_collision_normal()
 	
 	if is_colliding():
-		#print(_collider)
 		if _collider.has_method("take_damage"):
 			_collider.take_damage(damage, _point, _normal )
 		$mesh.hide()
