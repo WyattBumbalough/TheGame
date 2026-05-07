@@ -4,9 +4,10 @@ extends CharacterBody3D
 @export var enemy_data: EnemyData
 
 @export_group("Components")
-@export var visuals: EnemyVisuals
+@export var head: Node3D ## Used for line of sight from the eyeline rather than origin.
+@export var visuals: EnemyVisuals ## Contains meshes, VFX, animations, and some sounds.
 @export var nav_agent: NavigationAgent3D
-@export var movement_component: MovementComponent
+@export var movement_component: MovementComponent 
 @export var health_component: HealthManager
 @export var hitbox_component: Hitbox
 
@@ -59,11 +60,15 @@ func _physics_process(delta: float) -> void:
 	if _player:
 		distance_to_player = self.global_position.distance_to(_player.global_position)
 	
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+	
 	movement_component.update(delta)
 
 
 func _look_for_breadcrumbs(delta: float):
 	if time >= 0.3:
+		
 		if _has_sight_to_player():
 			_on_player_detected()
 			
@@ -75,15 +80,21 @@ func _look_for_breadcrumbs(delta: float):
 				var i = bc.instantiate()
 				get_tree().get_root().add_child(i)
 				i.global_position = breadcrumb
-			
 		time = 0.0
+		
 	else:
 		time += delta
 
 
 func _has_sight_to_player() -> bool:
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
-	var origin = global_position
+	var origin: Vector3
+	if head != null:
+		origin = head.global_position
+	else:
+		origin = global_position
+		printerr("%s head position not defined. Projecting sightline from world origin." %enemy_data.enemy_name)
+	
 	var end = _player.global_position + Vector3.UP
 	var query = PhysicsRayQueryParameters3D.create(origin, end)
 	query.collide_with_bodies = true

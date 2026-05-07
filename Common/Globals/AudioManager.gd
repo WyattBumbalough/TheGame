@@ -1,6 +1,10 @@
 extends Node
 
 
+func _ready() -> void:
+	randomize()
+
+
 func play_sound_3d(pos: Vector3, stream: AudioStream, spread: float = 10.0):
 	var new_3d_audio = AudioStreamPlayer3D.new()
 	get_tree().get_root().add_child(new_3d_audio)

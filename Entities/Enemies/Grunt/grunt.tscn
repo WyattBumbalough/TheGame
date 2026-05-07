@@ -20,7 +20,7 @@ hitspark = ExtResource("2_3t4ei")
 movement_speed = 3.5
 attack_damage = 30.0
 attack_range = 30.0
-max_number_of_attacks = 15
+max_number_of_attacks = 3
 attack_startup_time = 0.15
 attack_recovery_time = 0.25
 idle_anim_name = "idle1"
@@ -35,30 +35,35 @@ metadata/_custom_type_script = "uid://c12iah1jacbwu"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_73oyq"]
 radius = 0.275
+height = 1.7670898
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ku0in"]
 radius = 0.41455078
 height = 1.8330078
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_chp6x"]
-radius = 0.194
+radius = 0.38271174
 
-[node name="Grunt" type="CharacterBody3D" unique_id=814728106 node_paths=PackedStringArray("chase_timer", "projectile_spawner", "visuals", "nav_agent", "movement_component", "health_component")]
+[node name="Grunt" type="CharacterBody3D" unique_id=814728106 node_paths=PackedStringArray("chase_timer", "projectile_spawner", "head", "visuals", "nav_agent", "movement_component", "health_component")]
 script = ExtResource("1_tj64a")
-min_chase_time = 1.0
-max_chase_time = 2.5
+min_chase_time = 0.5
+max_chase_time = 1.5
 chase_timer = NodePath("ChaseTimer")
 projectile_spawner = NodePath("ProjectileSpawner")
 enemy_data = SubResource("Resource_73oyq")
+head = NodePath("Head")
 visuals = NodePath("GruntVisuals")
 nav_agent = NodePath("NavigationAgent3D")
 movement_component = NodePath("MovementComponent")
 health_component = NodePath("HealthManager")
 
+[node name="Head" type="Node3D" parent="." unique_id=185019062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
 [node name="GruntVisuals" parent="." unique_id=1107347924 instance=ExtResource("4_auxmi")]
 
 [node name="Collider" type="CollisionShape3D" parent="." unique_id=234547176]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8835449, 0)
 shape = SubResource("CapsuleShape3D_73oyq")
 debug_color = Color(0, 0.6, 0.69803923, 0.18431373)
 

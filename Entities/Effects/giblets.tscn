@@ -115,33 +115,37 @@ visible = false
 mesh = SubResource("BoxMesh_x1tk1")
 
 [node name="Decal" type="Decal" parent="." unique_id=596674370]
-transform = Transform3D(0.798, 0, 0, 0, 0.798, 0, 0, 0, 0.798, 0, -0.7885498, 0)
-size = Vector3(4, 2, 4)
+transform = Transform3D(0.798, 0, 0, 0, 0.798, 0, 0, 0, 0.798, 0, -0.03009212, 0)
+size = Vector3(4, 0.267, 4)
 texture_albedo = ExtResource("3_4l751")
-modulate = Color(0.540625, 0, 0, 1)
+emission_energy = 3.83
+modulate = Color(0.61875, 0.0058007664, 0.0058007664, 1)
 upper_fade = 1e-05
 lower_fade = 3.6621226e-05
 
 [node name="Decal2" type="Decal" parent="." unique_id=1000515654]
-transform = Transform3D(0.7852223, 0, 0.14223193, 0, 0.798, 0, -0.14223193, 0, 0.7852223, 1.010439, -0.7885498, 1.8518513)
-size = Vector3(4, 2, 4)
+transform = Transform3D(0.7852223, 0, 0.14223193, 0, 0.798, 0, -0.14223193, 0, 0.7852223, 1.010439, -0.03009212, 1.8518513)
+size = Vector3(4, 0.267, 4)
 texture_albedo = ExtResource("4_pxaf5")
-modulate = Color(0.540625, 0, 0, 1)
+emission_energy = 3.83
+modulate = Color(0.61875, 0.0058007664, 0.0058007664, 1)
 upper_fade = 1e-05
 lower_fade = 3.6621226e-05
 
 [node name="Decal4" type="Decal" parent="." unique_id=1152833300]
-transform = Transform3D(0.10658967, 0, -0.79084927, 0, 0.798, 0, 0.79084927, 0, 0.10658967, -1.3098439, -0.7885498, 1.0781494)
-size = Vector3(4, 2, 4)
+transform = Transform3D(0.10658967, 0, -0.79084927, 0, 0.798, 0, 0.79084927, 0, 0.10658967, -1.3098439, -0.03009212, 1.0781494)
+size = Vector3(4, 0.267, 4)
 texture_albedo = ExtResource("4_pxaf5")
-modulate = Color(0.540625, 0, 0, 1)
+emission_energy = 3.83
+modulate = Color(0.61875, 0.0058007664, 0.0058007664, 1)
 upper_fade = 1e-05
 lower_fade = 3.6621226e-05
 
 [node name="Decal3" type="Decal" parent="." unique_id=110718426]
-transform = Transform3D(-0.1266778, 0, 0.78788114, 0, 0.798, 0, -0.78788114, 0, -0.1266778, -0.2640344, -0.7885498, 0.2593596)
-size = Vector3(4, 2, 4)
+transform = Transform3D(-0.1266778, 0, 0.78788114, 0, 0.798, 0, -0.78788114, 0, -0.1266778, -0.2640344, -0.03009212, 0.2593596)
+size = Vector3(4, 0.267, 4)
 texture_albedo = ExtResource("5_n0hlc")
-modulate = Color(0.540625, 0, 0, 1)
+emission_energy = 3.83
+modulate = Color(0.61875, 0.0058007664, 0.0058007664, 1)
 upper_fade = 1e-05
 lower_fade = 3.6621226e-05

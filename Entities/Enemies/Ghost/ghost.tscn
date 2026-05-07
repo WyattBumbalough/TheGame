@@ -32,15 +32,19 @@ emission_energy_multiplier = 3.23
 radius = 1.299998
 height = 2.599996
 
-[node name="Ghost" type="CharacterBody3D" unique_id=1262409958 node_paths=PackedStringArray("hurtbox", "nav_agent", "movement_component", "health_component", "hitbox_component")]
+[node name="Ghost" type="CharacterBody3D" unique_id=1262409958 node_paths=PackedStringArray("hurtbox", "head", "nav_agent", "movement_component", "health_component", "hitbox_component")]
 collision_layer = 2
 script = ExtResource("1_gqgrj")
 hurtbox = NodePath("Hurtbox")
 enemy_data = ExtResource("2_hcida")
+head = NodePath("Head")
 nav_agent = NodePath("NavigationAgent3D")
 movement_component = NodePath("MovementComponent")
 health_component = NodePath("HealthComponent")
 hitbox_component = NodePath("Hitbox")
+
+[node name="Head" type="Node3D" parent="." unique_id=894179530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Collider" type="CollisionShape3D" parent="." unique_id=420682477]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
