@@ -2,15 +2,15 @@ extends PlayerState
 
 
 func enter(_previous_state: State):
-	character.bob_anims.play("WeaponBob", 0.25, 2)
+	PLAYER.cam_anims.play("WeaponBob", 0.25, 2)
 
 
 func handle_physics(_delta) -> State:
-	character.handle_movement(speed, accel, friction)
+	PLAYER.handle_movement(speed, accel, friction)
 	
-	var input_dir: Vector2 = character.input_direction
+	var input_dir: Vector2 = PLAYER.input_direction
 	if input_dir:
-		if Input.is_action_just_pressed(character.SPRINT) and character.allow_sprint:
+		if Input.is_action_just_pressed(PLAYER.SPRINT) and PLAYER.allow_sprint:
 			return run_state
 	elif input_dir == Vector2.ZERO:
 		return idle_state

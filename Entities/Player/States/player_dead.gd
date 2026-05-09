@@ -1,10 +1,11 @@
-extends Node
-class_name State
+extends PlayerState
+## Player death state.
 
-var character: CharacterBody3D
+
 
 func enter(_previous_state: State):
-	pass
+	PLAYER.allow_look = false
+	PLAYER.cam_anims.play("Dead")
 
 
 func exit(_next_state: State):
@@ -12,11 +13,10 @@ func exit(_next_state: State):
 
 
 func handle_physics(_delta) -> State:
+	PLAYER.handle_movement(speed, accel, friction)
+	
 	return null
 
-
-func handle_process(_delta) -> State:
-	return null
 
 
 func handle_input(_event: InputEvent) -> State:

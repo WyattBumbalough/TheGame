@@ -8,6 +8,8 @@ class_name EnemyData extends Resource
 
 @export_group("Navigation settings")
 @export var movement_speed: float = 10.0
+@export var min_movement_speed: float = 2.5
+@export var max_movement_speed: float = 4.5
 @export var min_nav_start_delay: float = 0.15 ##Minumum amount of time to wait before starting navigation.
 @export var mx_nav_start_delay: float = .75 ##Maximum amount of time to wait before starting navigation.
 
@@ -18,6 +20,7 @@ class_name EnemyData extends Resource
 @export var attack_startup_time: float = 0.5
 @export var attack_recovery_time: float = 0.15
 @export var attack_projectile: PackedScene
+@export var attack_projectile_speed: float = 50.0
 
 @export_group("Animation Settings")
 @export var idle_anim_name: String = ""

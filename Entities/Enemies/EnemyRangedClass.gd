@@ -45,7 +45,7 @@ func _attack():
 			visuals.stop_animation()
 			visuals.play_animation(enemy_data.attack_anim_name)
 			
-			projectile_spawner.spawn(100.0)
+			projectile_spawner.spawn(enemy_data.attack_projectile_speed)
 			
 			attacks_remaining -= 1
 

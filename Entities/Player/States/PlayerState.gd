@@ -1,6 +1,9 @@
 extends State
 class_name PlayerState
 
+@export var PLAYER: Player
+
+
 @export_category("Movement")
 @export var speed: float = 1.0
 @export var accel: float = 0.05

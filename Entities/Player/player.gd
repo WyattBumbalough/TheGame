@@ -17,18 +17,23 @@ const SENS = .002
 
 @export_group("Toggles")
 @export var allow_move: bool = true
+@export var allow_look: bool = true
 @export var allow_jump: bool = true
 @export var allow_crouch: bool = true
 @export var allow_sprint: bool = true
 
-@onready var head: Node3D = %CameraHolder
+@export_group("States")
+@export var state_machine: PlayerStateMachine
+@export var death_state: PlayerState
+
+@onready var head: CameraHolder = %CameraHolder
 @onready var camera: Camera3D = %Camera
-@onready var state_machine: StateMachine = %StateMachine
 @onready var health_manager: HealthManager = %HealthManager
+@onready var weapon_manager: WeaponManager = %WeaponManager
 @onready var hitbox: Hitbox = %Hitbox
 
 @onready var crosshair: Crosshair = %Crosshair
-@onready var bob_anims: AnimationPlayer = $BobAnims
+@onready var cam_anims: AnimationPlayer = $CamAnims
 
 
 var input_direction: Vector2
@@ -83,7 +88,7 @@ func _add_input_map_event(action_name: String, keycode: int) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.handle_input(event)
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and allow_look:
 		head.rotate_y( -event.relative.x * SENS )
 		camera.rotate_x( -event.relative.y * SENS )
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
@@ -158,3 +163,14 @@ func tween_cam_fov_down():
 
 func _on_health_manager_damage_taken(_amount: Variant, _pos: Variant, _nor: Variant) -> void:
 	$CanvasLayer/Control/DamageAnim.play("damage")
+
+
+func _on_health_manager_no_health() -> void:
+	weapon_manager.disable()
+	head.enable_camera_tilt = false
+	state_machine.change_state(death_state)
+	$CanvasLayer/Control/DamageAnim.play("Death")
+	await get_tree().create_timer(4.5).timeout
+	
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	%GameOverPanel.show()

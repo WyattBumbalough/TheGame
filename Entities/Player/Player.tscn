@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://d3e6bfqrdanju" path="res://Entities/Player/player.gd" id="1_2v7dq"]
 [ext_resource type="Script" uid="uid://badg5hnd5c3x7" path="res://Entities/Player/CameraHolder.gd" id="2_061yh"]
 [ext_resource type="PackedScene" uid="uid://buyir3bb35s8g" path="res://Entities/Player/Weapon Manager/weapon_manager.tscn" id="2_761t5"]
-[ext_resource type="Script" uid="uid://dhxpybn3be11e" path="res://Common/State Machine/state_machine.gd" id="2_oeplr"]
 [ext_resource type="Script" uid="uid://b7buwxinxyh7i" path="res://Entities/Player/States/player_idle.gd" id="3_oeplr"]
+[ext_resource type="Script" uid="uid://7ruyacgt40xy" path="res://Entities/Player/States/PlayerStateMachine.gd" id="4_hl213"]
 [ext_resource type="Script" uid="uid://hl5i56hdi4uo" path="res://Entities/Player/States/player_walk.gd" id="4_r4xyb"]
 [ext_resource type="Script" uid="uid://xl8ijqm5sg7h" path="res://Entities/Player/States/player_run.gd" id="5_c7660"]
 [ext_resource type="Script" uid="uid://disnpeb1gm84n" path="res://Entities/Player/States/player_jump.gd" id="6_6vmt3"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://8wxy8i07gac1" path="res://Entities/Player/States/player_crouch.gd" id="8_o4v1s"]
 [ext_resource type="Texture2D" uid="uid://c1ga7863m47nv" path="res://Assets/Reticles/crosshair007.png" id="10_hacra"]
 [ext_resource type="Script" uid="uid://blmqb163okhfp" path="res://Entities/Player/crosshair.gd" id="10_jynvv"]
+[ext_resource type="Script" uid="uid://c3trice54fqv6" path="res://Entities/Player/States/player_dead.gd" id="11_hl213"]
 [ext_resource type="Texture2D" uid="uid://cldhmereu64ky" path="res://Assets/Reticles/crosshair051.png" id="12_lmeus"]
 [ext_resource type="Script" uid="uid://67usyoo3ah6k" path="res://Entities/Player/hud.gd" id="14_uw7o4"]
 [ext_resource type="Script" uid="uid://bhqif5s7gmgge" path="res://Common/Components/HealthManager.gd" id="15_samso"]
@@ -38,19 +39,32 @@ albedo_color = Color(0.10224319, 0.10224321, 0.10224321, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_r4xyb"]
 font_size = 50
 
-[sub_resource type="Animation" id="Animation_samso"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_e34i1"]
+resource_name = "Death"
+length = 2.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DamageTaken:color")
+tracks/0/path = NodePath("DamageTaken:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DamageTaken:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.4698296),
+"transitions": PackedFloat32Array(1, 2),
 "update": 0,
-"values": [Color(0.6064911, -0.13048889, -0.13048889, 0.67468494)]
+"values": [Color(0.60784316, 0, 0, 0), Color(0.60784316, 0, 0, 0.32941177)]
 }
 
 [sub_resource type="Animation" id="Animation_hl213"]
@@ -83,7 +97,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5m37j"]
 _data = {
-&"RESET": SubResource("Animation_samso"),
+&"Death": SubResource("Animation_e34i1"),
 &"damage": SubResource("Animation_hl213")
 }
 
@@ -139,6 +153,36 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 corner_detail = 6
 
+[sub_resource type="LabelSettings" id="LabelSettings_hl213"]
+font_size = 24
+
+[sub_resource type="Animation" id="Animation_5m37j"]
+resource_name = "Dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraHolder:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.28371605, 1),
+"transitions": PackedFloat32Array(1, 1, 2),
+"update": 0,
+"values": [Vector3(0, 1.7002048, 0), Vector3(0, 0.72561234, 0), Vector3(0, 0.5170577, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CameraHolder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.46509373),
+"transitions": PackedFloat32Array(1, 2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.40317106)]
+}
+
 [sub_resource type="Animation" id="Animation_lmeus"]
 length = 0.001
 tracks/0/type = "value"
@@ -192,6 +236,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gallu"]
 _data = {
+&"Dead": SubResource("Animation_5m37j"),
 &"RESET": SubResource("Animation_lmeus"),
 &"WeaponBob": SubResource("Animation_061yh"),
 &"WeaponIdle": SubResource("Animation_uw7o4")
@@ -199,10 +244,12 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5m37j"]
 
-[node name="Player" type="CharacterBody3D" unique_id=222571555 groups=["Player"]]
+[node name="Player" type="CharacterBody3D" unique_id=222571555 node_paths=PackedStringArray("state_machine", "death_state") groups=["Player"]]
 collision_layer = 5
 script = ExtResource("1_2v7dq")
 allow_sprint = false
+state_machine = NodePath("StateMachine")
+death_state = NodePath("StateMachine/Dead")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1284730491]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -235,6 +282,7 @@ fov = 65.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.060474277, 0.042397022, 0)
 
 [node name="WeaponManager" parent="CameraHolder/Camera/WeaponBob" unique_id=1460823030 instance=ExtResource("2_761t5")]
+unique_name_in_owner = true
 infinite_ammo = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraHolder" unique_id=976964842]
@@ -250,7 +298,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_wsixc")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1214362270 node_paths=PackedStringArray("starting_state")]
 unique_name_in_owner = true
-script = ExtResource("2_oeplr")
+script = ExtResource("4_hl213")
 starting_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=492242798 node_paths=PackedStringArray("idle_state", "walk_state", "run_state", "jump_state", "fall_state", "crouch_state")]
@@ -311,6 +359,10 @@ jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 crouch_state = NodePath(".")
 
+[node name="Dead" type="Node" parent="StateMachine" unique_id=1209071186]
+script = ExtResource("11_hl213")
+speed = 0.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1822624688]
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=907013721]
@@ -342,16 +394,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DamageTaken" type="ColorRect" parent="CanvasLayer/Control" unique_id=793832751]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.6064911, -0.13048889, -0.13048889, 0.67468494)
+color = Color(0.60784316, 0, 0, 0)
 
 [node name="DamageAnim" type="AnimationPlayer" parent="CanvasLayer/Control" unique_id=1745203101]
+unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_5m37j")
 
 [node name="HUD" type="Control" parent="CanvasLayer" unique_id=162397166 node_paths=PackedStringArray("weapon_manager")]
@@ -445,7 +497,51 @@ modulate = Color(1, 0, 0, 0)
 layout_mode = 2
 texture = ExtResource("12_lmeus")
 
-[node name="BobAnims" type="AnimationPlayer" parent="." unique_id=1121762120]
+[node name="GameOverPanel" type="Panel" parent="CanvasLayer/HUD" unique_id=627990525]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = -104.0
+offset_right = 134.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD/GameOverPanel" unique_id=78467473]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -49.5
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="CanvasLayer/HUD/GameOverPanel/VBoxContainer" unique_id=345877645]
+layout_mode = 2
+text = "You died."
+label_settings = SubResource("LabelSettings_hl213")
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/HUD/GameOverPanel/VBoxContainer" unique_id=803424519]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Restart"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/HUD/GameOverPanel/VBoxContainer" unique_id=949787866]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+
+[node name="CamAnims" type="AnimationPlayer" parent="." unique_id=1121762120]
 libraries/ = SubResource("AnimationLibrary_gallu")
 autoplay = &"WeaponIdle"
 
@@ -465,4 +561,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_5m37j")
 debug_color = Color(0.7019608, 0, 0, 0.7294118)
 
+[connection signal="pressed" from="CanvasLayer/HUD/GameOverPanel/VBoxContainer/RestartButton" to="CanvasLayer/HUD" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HUD/GameOverPanel/VBoxContainer/QuitButton" to="CanvasLayer/HUD" method="_on_quit_button_pressed"]
 [connection signal="damage_taken" from="HealthManager" to="." method="_on_health_manager_damage_taken"]
+[connection signal="no_health" from="HealthManager" to="." method="_on_health_manager_no_health"]

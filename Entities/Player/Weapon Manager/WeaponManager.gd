@@ -42,6 +42,10 @@ var weapon_index: int = 0
 
 var can_change_weapons: bool = true
 var can_use_weapon: bool = true
+var can_shoot: bool = true
+var can_reload: bool = true
+var is_disabled: bool = false
+
 
 var tween: Tween
 
@@ -164,8 +168,8 @@ func weapon_sound_player(sound_name: AudioStream, sound_speed: float):
 
 
 func _weapon_inputs():
-	if Input.is_action_just_pressed(shoot_input): shoot_manager.shoot()
-	if Input.is_action_just_pressed(reload_input): reload_manager.reload()
+	if Input.is_action_just_pressed(shoot_input) and can_shoot: shoot_manager.shoot()
+	if Input.is_action_just_pressed(reload_input)and can_reload: reload_manager.reload()
 	
 	if Input.is_action_just_pressed(weapon_wheel_up_input):
 		if can_change_weapons and !cw.is_reloading and !cw.is_shooting:
@@ -189,3 +193,11 @@ func _weapon_inputs():
 	if Input.is_action_just_pressed(slot_4) and weapon_stack.size() > 3:
 		weapon_index = 3
 		_change_weapon(weapon_stack[weapon_index])
+
+
+func disable():
+	can_change_weapons = false
+	can_shoot = false
+	can_reload = false
+	is_disabled = true
+	hide()

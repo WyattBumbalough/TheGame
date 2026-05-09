@@ -43,7 +43,7 @@ func _setup():
 	health_component.damage_taken.connect(_on_damage_taken)
 	health_component.no_health.connect(_on_killed)
 	
-	movement_component.speed = enemy_data.movement_speed
+	movement_component.speed = randf_range(enemy_data.min_movement_speed, enemy_data.max_movement_speed)
 	movement_component.on_navigation_started.connect(_on_navigation_started)
 	
 	if visuals:

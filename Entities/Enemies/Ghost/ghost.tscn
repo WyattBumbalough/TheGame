@@ -13,7 +13,7 @@ radius = 0.2705078
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0etef"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.18039216)
+albedo_color = Color(0.13437498, 0.13437498, 0.13437498, 0.18039216)
 
 [sub_resource type="SphereMesh" id="SphereMesh_gqgrj"]
 radius = 0.25

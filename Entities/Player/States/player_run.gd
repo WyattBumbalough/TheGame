@@ -2,16 +2,16 @@ extends PlayerState
 
 
 func enter(_previous_state : State):
-	character.tween_cam_fov_up()
+	PLAYER.tween_cam_fov_up()
 
 
 func exit(_next_state: State):
 	if _next_state == walk_state:
-		character.tween_cam_fov_down()
+		PLAYER.tween_cam_fov_down()
 
 
 func handle_physics(_delta) -> State:
-	character.handle_movement(speed, accel, friction)
+	PLAYER.handle_movement(speed, accel, friction)
 	
 	return null
 

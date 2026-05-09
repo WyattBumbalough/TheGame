@@ -13,3 +13,11 @@ func _process(_delta: float) -> void:
 		wep_name.text = weapon_manager.cw.weapon_name
 		current_mag.text = str(weapon_manager.cw.current_ammo)
 		reserve.text = str(weapon_manager.ammo_manager.ammo[weapon_manager.cw.ammo_type])
+
+
+func _on_restart_button_pressed() -> void:
+	get_tree().reload_current_scene()
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
