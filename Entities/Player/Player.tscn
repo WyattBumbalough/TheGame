@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cwjomq7poa3ul"]
 
 [ext_resource type="Script" uid="uid://d3e6bfqrdanju" path="res://Entities/Player/player.gd" id="1_2v7dq"]
-[ext_resource type="Script" uid="uid://badg5hnd5c3x7" path="res://Entities/Player/CameraHolder.gd" id="2_061yh"]
+[ext_resource type="Script" uid="uid://badg5hnd5c3x7" path="res://Entities/Player/CameraRecoil.gd" id="2_061yh"]
 [ext_resource type="PackedScene" uid="uid://buyir3bb35s8g" path="res://Entities/Player/Weapon Manager/weapon_manager.tscn" id="2_761t5"]
+[ext_resource type="Script" uid="uid://fekdnlyxucpw" path="res://Entities/Player/CameraTilt.gd" id="3_5m37j"]
 [ext_resource type="Script" uid="uid://b7buwxinxyh7i" path="res://Entities/Player/States/player_idle.gd" id="3_oeplr"]
 [ext_resource type="Script" uid="uid://7ruyacgt40xy" path="res://Entities/Player/States/PlayerStateMachine.gd" id="4_hl213"]
 [ext_resource type="Script" uid="uid://hl5i56hdi4uo" path="res://Entities/Player/States/player_walk.gd" id="4_r4xyb"]
@@ -161,7 +162,7 @@ resource_name = "Dead"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CameraHolder:position")
+tracks/0/path = NodePath("Head:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -173,7 +174,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CameraHolder:rotation")
+tracks/1/path = NodePath("Head:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -188,7 +189,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CameraHolder/Camera/WeaponBob:position")
+tracks/0/path = NodePath("Head/CameraTilt/CamRecoil/Camera/WeaponBob:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -206,14 +207,14 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CameraHolder/Camera/WeaponBob:position")
+tracks/0/path = NodePath("Head/CameraTilt/CamRecoil/Camera/WeaponBob:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1, 1.5),
 "transitions": PackedFloat32Array(0.5, 2, 0.5, 2),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.060474277, 0.042397022, 0), Vector3(0, 0, 0), Vector3(0.084655166, 0.026283026, 0)]
+"values": [Vector3(0, 0, 0), Vector3(-0.012246937, 0.0053310394, 0), Vector3(0, 0, 0), Vector3(0.013320267, 0.0083117485, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_uw7o4"]
@@ -224,14 +225,14 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CameraHolder/Camera/WeaponBob:position")
+tracks/0/path = NodePath("Head/CameraTilt/CamRecoil/Camera/WeaponBob:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -0.028378963, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, -0.013, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gallu"]
@@ -263,34 +264,44 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_2v7dq")
 debug_color = Color(0, 0.85490197, 1, 0.85882354)
 
-[node name="CameraHolder" type="Node3D" parent="." unique_id=1586777397 node_paths=PackedStringArray("player")]
+[node name="Head" type="Node3D" parent="." unique_id=1586777397]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7002048, 0)
-script = ExtResource("2_061yh")
-tilt_rotation = 0.1
-tilt_speed = 3.0
-player = NodePath("..")
 metadata/_edit_group_ = true
 
-[node name="Camera" type="Camera3D" parent="CameraHolder" unique_id=212456546]
+[node name="CameraTilt" type="Node3D" parent="Head" unique_id=171017247 node_paths=PackedStringArray("player")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.060474277, 0.042397022, 0)
+script = ExtResource("3_5m37j")
+tilt_rotation = 0.15
+player = NodePath("../..")
+
+[node name="CamRecoil" type="Node3D" parent="Head/CameraTilt" unique_id=1868972605 node_paths=PackedStringArray("weapon_manager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.060474277, -0.042397022, 0)
+script = ExtResource("2_061yh")
+weapon_manager = NodePath("Camera/WeaponBob/WeaponManager")
+snap_amount = 8.5
+speed = 2.5
+
+[node name="Camera" type="Camera3D" parent="Head/CameraTilt/CamRecoil" unique_id=212456546]
 unique_name_in_owner = true
 cull_mask = 524287
 attributes = SubResource("CameraAttributesPractical_2v7dq")
 fov = 65.0
 
-[node name="WeaponBob" type="Node3D" parent="CameraHolder/Camera" unique_id=1431017574]
+[node name="WeaponBob" type="Node3D" parent="Head/CameraTilt/CamRecoil/Camera" unique_id=1431017574]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.060474277, 0.042397022, 0)
 
-[node name="WeaponManager" parent="CameraHolder/Camera/WeaponBob" unique_id=1460823030 instance=ExtResource("2_761t5")]
+[node name="WeaponManager" parent="Head/CameraTilt/CamRecoil/Camera/WeaponBob" unique_id=1460823030 node_paths=PackedStringArray("PLAYER") instance=ExtResource("2_761t5")]
 unique_name_in_owner = true
-infinite_ammo = false
+PLAYER = NodePath("../../../../../..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraHolder" unique_id=976964842]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head" unique_id=976964842]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, -0.0897913, 0)
 layers = 524288
 mesh = SubResource("SphereMesh_sbnxc")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraHolder/MeshInstance3D" unique_id=966979552]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/MeshInstance3D" unique_id=966979552]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.44189322, 0, 0.1291399, -0.3093412)
 layers = 524288
 mesh = SubResource("BoxMesh_oeplr")
@@ -415,7 +426,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("14_uw7o4")
-weapon_manager = NodePath("../../CameraHolder/Camera/WeaponBob/WeaponManager")
+weapon_manager = NodePath("../../Head/CameraTilt/CamRecoil/Camera/WeaponBob/WeaponManager")
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/HUD" unique_id=765894197]
 custom_minimum_size = Vector2(0, 100)

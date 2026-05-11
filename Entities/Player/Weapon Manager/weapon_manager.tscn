@@ -3,15 +3,18 @@
 [ext_resource type="Script" uid="uid://cb1ioge6w6c1m" path="res://Entities/Player/Weapon Manager/WeaponManager.gd" id="1_rakqe"]
 [ext_resource type="Script" uid="uid://byxrd0b7bduam" path="res://Entities/Player/Weapon Manager/WeaponSlot.gd" id="2_ggl38"]
 [ext_resource type="PackedScene" uid="uid://chqhfnoo3ovdy" path="res://Entities/Weapons/Melee/TestMelee/pipe.tscn" id="2_rakqe"]
-[ext_resource type="Script" uid="uid://i1iyutq4ctea" path="res://Entities/Weapons/weapon_data.gd" id="2_xqmo2"]
+[ext_resource type="Script" uid="uid://i1iyutq4ctea" path="res://Entities/Weapons/WeaponData.gd" id="2_xqmo2"]
 [ext_resource type="Resource" uid="uid://05a5neu6lqst" path="res://Entities/Weapons/Resources/PistolWeaponData.tres" id="3_55cga"]
 [ext_resource type="Resource" uid="uid://dg0wedetyp71l" path="res://Entities/Weapons/Resources/ShotgunWeaponData.tres" id="4_stskr"]
 [ext_resource type="Texture2D" uid="uid://cqq1ahe0vih5s" path="res://Assets/Textures/Metal/metal_mp_3.png" id="5_55cga"]
+[ext_resource type="Resource" uid="uid://pvjvp333d433" path="res://Entities/Weapons/Guns/Rifle/RifleWeaponData.tres" id="5_t3a6m"]
 [ext_resource type="Texture2D" uid="uid://dx3f5o6ulrr58" path="res://Assets/Textures/Wood/Wood_25-256x256.png" id="6_eqruy"]
+[ext_resource type="PackedScene" uid="uid://b7yj2qf80bltt" path="res://Entities/Weapons/Guns/Rifle/rifle_1.tscn" id="8_kqers"]
 [ext_resource type="Script" uid="uid://byn16isd5e0yc" path="res://Entities/Player/Weapon Manager/ShootManager.gd" id="9_vsa0j"]
 [ext_resource type="Script" uid="uid://5n1desf5vwc" path="res://Entities/Player/Weapon Manager/AmmoManager.gd" id="10_qrvt1"]
 [ext_resource type="Script" uid="uid://bks14xhhyoylc" path="res://Entities/Player/Weapon Manager/AnimManager.gd" id="11_koiay"]
 [ext_resource type="Script" uid="uid://doqw7j7glj8lb" path="res://Entities/Player/Weapon Manager/ReloadManager.gd" id="12_4rrlr"]
+[ext_resource type="Script" uid="uid://dm41nvdyfwi28" path="res://Entities/Player/Weapon Manager/AimingManager.gd" id="15_peokh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqmo2"]
 albedo_texture = ExtResource("5_55cga")
@@ -74,6 +77,39 @@ _surfaces = [{
 "vertex_data": PackedByteArray("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oG8JPmXqBr6BuVI+8lUJPhBKxL0UhI4+EK4KPkfQBL7cORy+61cIPsKuVb5R99s+uboJPg8DxboUhI4+8lUJPhBKxL0UhI4+61cIPsKuVb5R99s+nzQJPkCl57rzJtw+uboJPg8DxboUhI4+nzQJPkCl57rzJtw+NIr8vTgN7rkUhI4+uboJPg8DxboUhI4+E/ALPnpvFLw3Kr6+E3YKPhBKxL1gL0W98s8KPgnpP7xgL0W9/38AAP//AAD/fwAAAAAAAP9/AAAAAAAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAAAAAAD/fwAAAAAAAP9/AAAAAAAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//////wAA/z//////AAD/P/////8AAP8//////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA/////wAA/z//////AAD/P/////8AAP8//3/60wAA/7//f/rTAAD/v/9/+tMAAP+//38AAAAAAAD/fwAAAAAAAP9/AAAAAAAA/////wAA/z//////AAD/P/////8AAP8//38AAAAAAAD/fwAAAAAAAP9/AAD//wAA////f/9//n////9//3/+f////3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8//////wAA/z//////AAD/P/////8AAP8//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA/3/60wAA/7//f/rTAAD/v/9/+tMAAP+//////wAA/z//////AAD/P/////8AAP8/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8/////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5/hADxgEF/vX+EAPGAQX+9f4QA8YBBf71/hADxgEF/vX+EAPGAQX+9f4QA8YBBf71/hADxgEF/vX+EAPGAQX+9f4QA8YBBf71/xv+R/4QAhj/G/5H/hACGP8b/kf+EAIY/xv+R/4QAhj/G/5H/hACGP8b/kf+EAIY/QX+EAMb/NgBBf4QAxv82AEF/hADG/zYAxv+R/4QAhj/G/5H/hACGP8b/kf+EAIY/hADxgEF/vX+EAPGAQX+9f4QA8YBBf71/QX+EAMb/NgBBf4QAxv82AEF/hADG/zYA2H+Jf9M+bqDYf4l/0z5uoNh/iX/TPm6g0z7eQA6/cp/TPt5ADr9yn9M+3kAOv3Kf2H+Jf9M+bqDYf4l/0z5uoNh/iX/TPm6gGUHwwIn/6/8ZQfDAif/r/xlB8MCJ/+v/0z7eQA6/cp/TPt5ADr9yn9M+3kAOv3KfGUHwwIn/6/8ZQfDAif/r/xlB8MCJ/+v/GUHwwIn/6/8ZQfDAif/r/xlB8MCJ/+v/if/X/9M+bqCJ/9f/0z5uoIn/1//TPm6gQX+EAMb/NgBBf4QAxv82AEF/hADG/zYAhADxgEF/vX+EAPGAQX+9f4QA8YBBf71/if/X/9M+bqCJ/9f/0z5uoIn/1//TPm6ghADxgEF/vX+EAPGAQX+9f4QA8YBBf71/hADxgEF/vX+EAPGAQX+9f4QA8YBBf71/hADxgEF/vX+EAPGAQX+9f4QA8YBBf71/hADxgEF/vX+EAPGAQX+9f4QA8YBBf71/hADxgEF/vX+EAPGAQX+9f4QA8YBBf71/hQDygEJ/vH+FAPKAQn+8f4UA8oBCf7x/QX+EAMb/NwBBf4QAxv83AEF/hADG/zcAQX+EAMb/NgBBf4QAxv82AEF/hADG/zYAQX+EAMb/NgBBf4QAxv82AEF/hADG/zYAQX+EAMb/NgBBf4QAxv82AEF/hADG/zYAkX/Gf4QAhj+Rf8Z/hACGP5F/xn+EAIY/xv+Q/4QAhj/G/5D/hACGP8b/kP+EAIY/hADxgEF/vX+EAPGAQX+9f4QA8YBBf71/hIBB/8b/NgCEgEH/xv82AISAQf/G/zYAxv+R/4QAhj/G/5H/hACGP8b/kf+EAIY/xf+Q/4QAhj/F/5D/hACGP8X/kP+EAIY/xv+R/4QAhj/G/5H/hACGP8b/kf+EAIY/DP96f0F/vX8M/3p/QX+9fwz/en9Bf71/xv+R/4QAhj/G/5H/hACGP8b/kf+EAIY/xv+R/4QAhj/G/5H/hACGP8b/kf+EAIY/DP96f0F/vX8M/3p/QX+9fwz/en9Bf71/DP96f0J/vX8M/3p/Qn+9fwz/en9Cf71/QX+EAMb/NgBBf4QAxv82AEF/hADG/zYAQX+EAMb/NgBBf4QAxv82AEF/hADG/zYAQX+EAMb/NgBBf4QAxv82AEF/hADG/zYAkX/Gf4QAhj+Rf8Z/hACGP5F/xn+EAIY/Dr/mPon/6/8Ov+Y+if/r/w6/5j6J/+v/QX+EAMb/NgBBf4QAxv82AEF/hADG/zYA2H+Jf9M+bqDYf4l/0z5uoNh/iX/TPm6gDr/mPon/6/8Ov+Y+if/r/w6/5j6J/+v/Dr/mPon/6/8Ov+Y+if/r/w6/5j6J/+v/if/X/9M+bqCJ/9f/0z5uoIn/1//TPm6gQX+EAMb/NgBBf4QAxv82AEF/hADG/zYADP96f0F/vX8M/3p/QX+9fwz/en9Bf71/DP96f0F/vX8M/3p/QX+9fwz/en9Bf71/DP96f0F/vX8M/3p/QX+9fwz/en9Bf71/DP96f0F/vX8M/3p/QX+9fwz/en9Bf71/DP96f0F/vX8M/3p/QX+9fwz/en9Bf71/DP96f0F/vX8M/3p/QX+9fwz/en9Bf71/DP96f0F/vX8M/3p/QX+9fwz/en9Bf71/DP96f0F/vX8M/3p/QX+9fwz/en9Bf71/hIBB/8b/NgCEgEH/xv82AISAQf/G/zYADP96f0F/vX8M/3p/QX+9fwz/en9Bf71/")
 }]
 
+[sub_resource type="Animation" id="Animation_vracf"]
+resource_name = "AimPistol"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightHand/Pistol:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 2),
+"update": 0,
+"values": [Vector3(0.22352022, -0.21703297, -0.6494898), Vector3(0.023349404, -0.21703297, -0.5431948)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightHand/Pistol:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.03141594, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e2khv"]
+resource_name = "AimRifle"
+
+[sub_resource type="Animation" id="Animation_ocpdg"]
+resource_name = "AimShotgun"
+
 [sub_resource type="Animation" id="Animation_eqruy"]
 resource_name = "EquipPistol"
 length = 0.5
@@ -100,6 +136,46 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(-0.8709193, 0, 0), Vector3(0.03141593, 0, 0), Vector3(0.08726646, 0, 0), Vector3(0.03141593, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7gci5"]
+resource_name = "EquipRifle"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightHand/Rifle:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightHand/Rifle:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26903102, 0.5),
+"transitions": PackedFloat32Array(1, 0.5, 2),
+"update": 0,
+"values": [Vector3(0.14853632, -0.36938637, -0.08794904), Vector3(0.16343665, -0.16867673, -0.3830673), Vector3(0.14853632, -0.16808057, -0.38306737)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RightHand/Rifle:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.112711184, 0.35582685, 0.5),
+"transitions": PackedFloat32Array(1, -2, 2),
+"update": 0,
+"values": [Vector3(-0.44754988, -0.43784, 0.8246569), Vector3(0, 0, -0.055571284), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_4rrlr"]
@@ -180,6 +256,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector3(-0.8016472, 0, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RightHand/Rifle:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.14853632, -0.36938637, -0.34202433)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RightHand/Rifle:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.61552525, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_peokh"]
 resource_name = "ReloadPistol"
@@ -237,6 +337,34 @@ tracks/1/keys = {
 "values": [Vector3(0.03141593, 0, 0), Vector3(0.5799517, 0, 0), Vector3(0.7891682, 0, 0), Vector3(-0.034906585, 0, 0), Vector3(0.03141593, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_j4xsp"]
+resource_name = "ShootRifle"
+length = 0.12680994
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RightHand/Rifle:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.027540503),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Vector3(0.14853632, -0.16808057, -0.3758846), Vector3(0.149, -0.168, -0.413)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RightHand/Rifle:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.12565261),
+"transitions": PackedFloat32Array(1, 2),
+"update": 0,
+"values": [Vector3(0.013962634, 0, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_t3a6m"]
 resource_name = "ShootShotgun"
 length = 0.4
@@ -267,11 +395,16 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_stskr"]
 _data = {
+&"AimPistol": SubResource("Animation_vracf"),
+&"AimRifle": SubResource("Animation_e2khv"),
+&"AimShotgun": SubResource("Animation_ocpdg"),
 &"EquipPistol": SubResource("Animation_eqruy"),
+&"EquipRifle": SubResource("Animation_7gci5"),
 &"EquipShotgun": SubResource("Animation_4rrlr"),
 &"RESET": SubResource("Animation_kqers"),
 &"ReloadPistol": SubResource("Animation_peokh"),
 &"ShootPistol": SubResource("Animation_qrvt1"),
+&"ShootRifle": SubResource("Animation_j4xsp"),
 &"ShootShotgun": SubResource("Animation_t3a6m")
 }
 
@@ -385,10 +518,11 @@ _data = {
 
 [node name="WeaponManager" type="Node3D" unique_id=1460823030 node_paths=PackedStringArray("starting_weapons")]
 script = ExtResource("1_rakqe")
-weapon_resources = Array[ExtResource("2_xqmo2")]([ExtResource("3_55cga"), ExtResource("4_stskr")])
-starting_weapons = [NodePath("RightHand/Pistol"), NodePath("RightHand/Shotgun")]
+weapon_resources = Array[ExtResource("2_xqmo2")]([ExtResource("3_55cga"), ExtResource("4_stskr"), ExtResource("5_t3a6m")])
+starting_weapons = [NodePath("RightHand/Pistol"), NodePath("RightHand/Shotgun"), NodePath("RightHand/Rifle")]
 infinite_ammo = true
 shoot_input = "shoot"
+aim_input = "aim"
 reload_input = "reload"
 weapon_wheel_up_input = "weapon_wheel_up"
 weapon_wheel_down_input = "weapon_wheel_down"
@@ -400,9 +534,10 @@ slot_4 = "weapon_4"
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1951383143]
 fov = 65.0
 
-[node name="Audio" type="AudioStreamPlayer" parent="." unique_id=2098827643]
+[node name="Audio" type="AudioStreamPlayer3D" parent="." unique_id=1170493893]
 unique_name_in_owner = true
-max_polyphony = 3
+volume_db = -15.0
+panning_strength = 0.0
 bus = &"SFX"
 
 [node name="LightFlash" type="OmniLight3D" parent="." unique_id=820310910]
@@ -418,7 +553,7 @@ omni_attenuation = 0.195
 unique_name_in_owner = true
 
 [node name="Pistol" type="Node3D" parent="RightHand" unique_id=1126944122 node_paths=PackedStringArray("weapon_model", "barrel_point")]
-transform = Transform3D(1, 0, 0, 0, 0.695524, 0.7185025, 0, -0.7185025, 0.695524, 0.22352022, -0.7352539, -0.6494898)
+transform = Transform3D(1, 0, 0, 0, 0.6955238, 0.71850234, 0, -0.71850234, 0.6955238, 0.22352022, -0.7352539, -0.6494898)
 script = ExtResource("2_ggl38")
 weapon_model = NodePath("PistolModel")
 weapon_id = 1
@@ -446,6 +581,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.0076984167
 
 [node name="Shotgun" type="Node3D" parent="RightHand" unique_id=1367591796 node_paths=PackedStringArray("weapon_model", "barrel_point")]
 transform = Transform3D(1, 0, 0, 0, 0.9338054, -0.3577813, 0, 0.3577813, 0.9338054, 0.30721074, -0.33868733, -0.6752724)
+visible = false
 script = ExtResource("2_ggl38")
 weapon_model = NodePath("ShotgunModel")
 weapon_id = 2
@@ -504,6 +640,21 @@ mesh = SubResource("ArrayMesh_vsa0j")
 [node name="Marker3D" type="Marker3D" parent="RightHand/Shotgun" unique_id=788036388]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0228419, -1.1048218)
 
+[node name="Rifle" type="Node3D" parent="RightHand" unique_id=886125493 node_paths=PackedStringArray("weapon_model", "barrel_point")]
+transform = Transform3D(1, 0, 0, 0, 0.81647027, 0.5773874, 0, -0.57738745, 0.8164702, 0.14853632, -0.36938637, -0.34202433)
+visible = false
+script = ExtResource("2_ggl38")
+weapon_model = NodePath("rifle1")
+weapon_id = 3
+barrel_point = NodePath("Marker3D")
+metadata/_custom_type_script = "uid://byxrd0b7bduam"
+metadata/_edit_group_ = true
+
+[node name="rifle1" parent="RightHand/Rifle" unique_id=1920801335 instance=ExtResource("8_kqers")]
+
+[node name="Marker3D" type="Marker3D" parent="RightHand/Rifle" unique_id=1354746355]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.023149252, 0.028689533, -0.49663538)
+
 [node name="LeftHand" type="Node3D" parent="." unique_id=1226825114]
 visible = false
 
@@ -553,3 +704,8 @@ script = ExtResource("12_4rrlr")
 weapon_manager = NodePath("..")
 ammo_manager = NodePath("../AmmoManager")
 anim_manager = NodePath("../AnimationsManager")
+
+[node name="AimingManager" type="Node" parent="." unique_id=586277727 node_paths=PackedStringArray("weapon_manager")]
+unique_name_in_owner = true
+script = ExtResource("15_peokh")
+weapon_manager = NodePath("..")

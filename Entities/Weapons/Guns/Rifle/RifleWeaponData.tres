@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://pvjvp333d433"]
+
+[ext_resource type="PackedScene" uid="uid://dkb3c4k60i56b" path="res://Entities/Weapons/muzzle_flash.tscn" id="1_2cjlj"]
+[ext_resource type="Script" uid="uid://i1iyutq4ctea" path="res://Entities/Weapons/WeaponData.gd" id="1_sysj8"]
+[ext_resource type="AudioStream" uid="uid://c5uem8okfhmqs" path="res://Entities/Weapons/Guns/Rifle/Data/gunshot_layered.mp3" id="3_pgcje"]
+
+[resource]
+script = ExtResource("1_sysj8")
+weapon_name = "Rifle"
+weapon_id = 3
+weapon_damage = 10.0
+auto = true
+min_spread = -0.1
+max_spread = 0.1
+camera_y_recoil = 0.02
+camera_x_recoil = 0.01
+zoom_amount = 20.0
+max_ammo_capacity = 30
+ammo_type = "Rifle"
+current_ammo = 30
+current_reserve_ammo = 60
+shoot_sound = ExtResource("3_pgcje")
+equip_anim_name = "EquipRifle"
+shoot_anim_name = "ShootRifle"
+shoot_anim_speed = 1.25
+reload_anim_name = "ReloadRifle"
+muzzle_flash_ref = ExtResource("1_2cjlj")
+metadata/_custom_type_script = "uid://i1iyutq4ctea"

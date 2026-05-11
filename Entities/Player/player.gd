@@ -26,8 +26,9 @@ const SENS = .002
 @export var state_machine: PlayerStateMachine
 @export var death_state: PlayerState
 
-@onready var head: CameraHolder = %CameraHolder
+@onready var head: Node3D = %Head
 @onready var camera: Camera3D = %Camera
+@onready var camera_tilt: CameraTilt = %CameraTilt
 @onready var health_manager: HealthManager = %HealthManager
 @onready var weapon_manager: WeaponManager = %WeaponManager
 @onready var hitbox: Hitbox = %Hitbox
@@ -50,6 +51,9 @@ func _ready() -> void:
 	
 	head.rotation.y = rotation.y
 	rotation.y = 0.0
+	
+	weapon_manager.weapon_aimed.connect(func(): camera_tilt.enable_camera_tilt = false)
+	weapon_manager.weapon_lowered.connect(func(): camera_tilt.enable_camera_tilt = true)
 
 
 func _check_controls() -> void:
@@ -158,7 +162,8 @@ func tween_cam_fov_down():
 	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.tween_property(camera, "fov", base_fov, 0.75)
-	
+
+
 
 
 func _on_health_manager_damage_taken(_amount: Variant, _pos: Variant, _nor: Variant) -> void:
@@ -167,7 +172,7 @@ func _on_health_manager_damage_taken(_amount: Variant, _pos: Variant, _nor: Vari
 
 func _on_health_manager_no_health() -> void:
 	weapon_manager.disable()
-	head.enable_camera_tilt = false
+	camera_tilt.enable_camera_tilt = false
 	state_machine.change_state(death_state)
 	$CanvasLayer/Control/DamageAnim.play("Death")
 	await get_tree().create_timer(4.5).timeout

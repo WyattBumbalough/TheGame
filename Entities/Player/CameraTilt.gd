@@ -1,9 +1,4 @@
-extends Node3D
-class_name CameraHolder
-
-@export_group("Camera settings")
-@export_range(0.0,5.0,0.01) var x_axis_sens: float
-@export_range(0.0,5.0,0.01) var y_axis_sens: float
+class_name CameraTilt extends Node3D
 
 @export_group("Camera Tilt Settings")
 @export var enable_camera_tilt: bool = true

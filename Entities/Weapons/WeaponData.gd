@@ -9,11 +9,21 @@ var weapon_slot: WeaponSlot
 @export_group("Attack Settings")
 var is_shooting: bool = false
 @export var weapon_damage: float
+@export var auto: bool = false
+@export var rate_of_fire: float = 0.3
 @export var headshot_damage_multiplier: float = 2.0
 @export var projectiles_per_shot: int = 1
 @export var min_spread: float
 @export var max_spread: float
 @export var damage_dropoff: Curve
+
+@export_group("Recoil Settings")
+@export var camera_y_recoil: float
+@export var camera_x_recoil: float
+
+@export_group("Aiming Settings")
+var is_aiming: bool = false
+@export var zoom_amount: float = 1.25
 
 @export_group("Ammo Settings")
 @export var max_ammo_capacity: int

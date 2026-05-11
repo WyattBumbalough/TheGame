@@ -9,6 +9,7 @@ extends EnemyBaseClass
 
 var attacks_remaining: int
 
+
 func _ready() -> void:
 	super()
 	chase_timer.timeout.connect(_on_chase_timer_ended)
@@ -23,8 +24,6 @@ func _aim():
 	# Stop moving and stop looking for player.
 	can_scan_for_player = false
 	movement_component.stop_navigation()
-	
-	
 	
 	if enemy_data.aim_anim_name != "":
 		AudioManager.play_sound_3d(global_position, enemy_data.aim_sound, 20.0)

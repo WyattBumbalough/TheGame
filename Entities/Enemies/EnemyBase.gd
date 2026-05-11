@@ -35,7 +35,7 @@ func _ready() -> void:
 	_setup()
 
 func _setup():
-	await get_tree().process_frame
+	#await get_tree().process_frame
 	_player = Refs.PLAYER
 	distance_to_player = global_position.distance_to(_player.global_position)
 	
@@ -67,7 +67,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _look_for_breadcrumbs(delta: float):
-	if time >= 0.3:
+	if time >= 0.1:
 		
 		if _has_sight_to_player():
 			_on_player_detected()

@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://dg0wedetyp71l"]
 
-[ext_resource type="Script" uid="uid://i1iyutq4ctea" path="res://Entities/Weapons/weapon_data.gd" id="1_0ihqm"]
 [ext_resource type="PackedScene" uid="uid://dkb3c4k60i56b" path="res://Entities/Weapons/muzzle_flash.tscn" id="1_ras73"]
+[ext_resource type="Script" uid="uid://i1iyutq4ctea" path="res://Entities/Weapons/WeaponData.gd" id="2_m76fr"]
+[ext_resource type="AudioStream" uid="uid://b8lbb1fefyutl" path="res://Assets/SFX/Guns/shotgun_shoot.wav" id="3_m76fr"]
 
 [resource]
-script = ExtResource("1_0ihqm")
+script = ExtResource("2_m76fr")
 weapon_name = "Shotgun"
 weapon_id = 2
 weapon_damage = 10.0
@@ -12,10 +13,13 @@ headshot_damage_multiplier = 1.25
 projectiles_per_shot = 10
 min_spread = -13.0
 max_spread = 12.0
+camera_y_recoil = 0.25
+camera_x_recoil = 0.35
 max_ammo_capacity = 2
 ammo_type = "Shells"
 current_ammo = 2
 current_reserve_ammo = 10
+shoot_sound = ExtResource("3_m76fr")
 equip_anim_name = "EquipShotgun"
 shoot_anim_name = "ShootShotgun"
 shoot_anim_speed = 1.75

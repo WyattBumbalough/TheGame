@@ -2,7 +2,7 @@ extends PlayerState
 
 
 func enter(_previous_state: State):
-	PLAYER.cam_anims.play("WeaponBob", 0.25, 2)
+	PLAYER.cam_anims.play("WeaponBob", 0.25, 2.25)
 
 
 func handle_physics(_delta) -> State:

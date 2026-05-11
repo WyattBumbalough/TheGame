@@ -2,12 +2,18 @@
 extends Node3D
 class_name WeaponManager
 
+signal weapon_fired
+signal weapon_aimed
+signal weapon_lowered
+
+@export var PLAYER: Player
 @export var weapon_resources: Array[WeaponData] # Store weapon data for all weapons in an array.
 @export var starting_weapons: Array[WeaponSlot]
 @export var infinite_ammo: bool = false
 
 @export_group("Input mapping")
 @export var shoot_input: String
+@export var aim_input: String
 @export var reload_input: String
 @export var weapon_wheel_up_input: String
 @export var weapon_wheel_down_input: String
@@ -20,7 +26,7 @@ class_name WeaponManager
 @onready var right_hand: Node3D = %RightHand
 @onready var left_hand: Node3D = $LeftHand
 @onready var anims: AnimationPlayer = %AnimationPlayer
-@onready var audio: AudioStreamPlayer = %Audio
+@onready var audio: AudioStreamPlayer3D = %Audio
 @onready var light_flash: OmniLight3D = %LightFlash
 
 # Sub-managers
@@ -28,6 +34,8 @@ class_name WeaponManager
 @onready var ammo_manager: AmmoManager = %AmmoManager
 @onready var animations_manager: AnimManager = %AnimationsManager
 @onready var reload_manager: ReloadManager = $ReloadManager
+@onready var aiming_manager: AimingManager = %AimingManager
+
 
 # Spawn objects
 @onready var bullethole_decal: PackedScene = preload("res://Entities/Weapons/Decals/bullethole_decal.tscn")
@@ -45,7 +53,6 @@ var can_use_weapon: bool = true
 var can_shoot: bool = true
 var can_reload: bool = true
 var is_disabled: bool = false
-
 
 var tween: Tween
 
@@ -69,7 +76,6 @@ func _initialize():
 	# Step through the list, setting each weapon as current to access its properties.
 	for i in weapon_list.keys():
 		cw = weapon_list[i]
-		
 		# Search for the weapon slot with the cooresponding weapon ID.
 		for slot in right_hand.get_children():
 			if slot.weapon_id == cw.weapon_id:
@@ -90,7 +96,8 @@ func _enter_weapon(next_weapon: int):
 	cw = weapon_list[next_weapon]
 	next_weapon = 0
 	cw_model = cw.weapon_slot.weapon_model
-	cw_model.visible = true
+	cw.weapon_slot.show()
+	cw_model.show()
 	
 	if cw.equip_anim_name != "":
 		anims.play(cw.equip_anim_name, -1, cw.equip_anim_speed)
@@ -113,7 +120,8 @@ func _exit_weapon(next_weapon: int):
 		can_change_weapons = false
 		can_use_weapon = false
 		
-		cw_model.visible = false
+		cw.weapon_slot.hide()
+		cw_model.hide()
 		_enter_weapon(next_weapon)
 
 
@@ -161,14 +169,32 @@ func spawn_muzzle_flash(_scale: Vector3):
 	tween.tween_property(light_flash, "light_energy", 0.0, 0.2)
 
 
-func weapon_sound_player(sound_name: AudioStream, sound_speed: float):
-	audio.stream = sound_name
-	audio.pitch_scale = sound_speed
+func weapon_sound_player(sound_name: AudioStream, sound_speed: float, random_pitch: bool = false):
+	if audio.stream != sound_name:
+		audio.stream = sound_name
+	if random_pitch:
+		audio.pitch_scale = randf_range(sound_speed + 0.05, sound_speed - 0.05)
+	else:
+		audio.pitch_scale = sound_speed
 	audio.play()
 
 
 func _weapon_inputs():
-	if Input.is_action_just_pressed(shoot_input) and can_shoot: shoot_manager.shoot()
+	if Input.is_action_pressed(shoot_input) and can_shoot and cw.auto: 
+		shoot_manager.shoot()
+	if Input.is_action_just_pressed(shoot_input) and can_shoot:
+		shoot_manager.shoot()
+	if Input.is_action_pressed("aim"):
+		if !cw.is_aiming and !cw.is_reloading and !cw.is_shooting:
+			cw.is_aiming = true
+			aiming_manager.zoom_camera_in()
+			weapon_aimed.emit()
+	if Input.is_action_just_released(aim_input) and cw.is_aiming:
+		cw.is_aiming = false
+		aiming_manager.zoom_camera_out()
+		weapon_lowered.emit()
+		
+		
 	if Input.is_action_just_pressed(reload_input)and can_reload: reload_manager.reload()
 	
 	if Input.is_action_just_pressed(weapon_wheel_up_input):
